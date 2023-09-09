@@ -1,17 +1,11 @@
-import topBar from "./layouts/topBar.js";
+import TopBar from "./js/bar/TopBar";
 
-const monitors = ags.Service.Hyprland.HyprctlGet("monitors").map(
-  (mon) => mon.id,
-);
-
-const scss = ags.App.configDir + "/style/scss/main.scss";
-const css = ags.App.configDir + "/style/css/main.css";
-
-// make sure sassc is installed on your system
-ags.Utils.exec(`mkdir ${ags.App.configDir + "/style/css"}`);
-ags.Utils.exec(`sass ${scss} ${css}`);
+const ws = ags.Service.Hyprland.HyprctlGet('monitors');
+const forMonitors = widget => ws.map(mon => widget(mon.id));
 
 export default {
-	style: css,
-	windows: [...topBar(monitors)],
-};
+	maxStreamVolume: 2.0,
+	windows: [
+		forMonitors(TopBar)
+	]
+}
