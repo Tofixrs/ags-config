@@ -29,7 +29,7 @@ function workspaceBtn(id, indicator) {
 		child: indicator ? indicator() : Label(`${id}`),
 		connections: [[Hyprland, btn => {
 			const { active } = Hyprland;
-			const occupied = Hyprland.getWorkspace(i)?.windows > 0;
+			const occupied = Hyprland.getWorkspace(id)?.windows > 0;
 			btn.toggleClassName('active', active.workspace.id === id);
 			btn.toggleClassName('occupied', occupied);
 			btn.toggleClassName('empty', !occupied);
