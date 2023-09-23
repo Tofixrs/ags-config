@@ -1,0 +1,12 @@
+@mixin panel_button($flat: false, $reactive: true) {
+	all: unset;
+
+}
+.panel {
+	separator {
+		background-color: transparentize($base, 0.9);
+		border-radius: $radii;
+		min-height: 5px;
+		min-width: 5px;
+	}
+}
