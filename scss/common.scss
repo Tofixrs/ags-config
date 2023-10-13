@@ -8,3 +8,24 @@ window {
 		font-size: $font-size;
 	}
 }
+
+@mixin widget {
+	@include common;
+	border-radius: $radii;
+	color: $base;
+	background-color: $crust;
+}
+
+@mixin floating_widget {
+	@include common;
+
+	@if $drop-shadow {
+		box-shadow: 0 0 min(6px, $spacing/2) 0 $shadow;
+	}
+	margin: max($spacing, 8px);
+    border: $border-width solid $crust;
+    border-radius: $popover-radius;
+    background-color: $base;
+    color: $text;
+    padding: $popover-padding;
+}

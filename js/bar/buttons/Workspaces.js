@@ -3,30 +3,26 @@ const { Box, EventBox, Button, Label } = ags.Widget;
 const { execAsync } = ags.Utils;
 const { Hyprland } = ags.Service;
 
-export const Workspaces = ({ workspaces: fixed = options.workspaces, indicator } = {}) => Box({
+export const Workspaces = ({ workspaces: fixed = options.workspaces, indicator } = {}) => EventBox({
+	onScrollUp: () => execAsync(["hyprctl", "dispatch", "workspace", "+1"]),
+	onScrollDown: () => execAsync(["hyprctl", "dispatch", "workspace", "-1"]),
 	className: "workspaces panel-button",
 	child: Box({
-		child: EventBox({
-			onScrollUp: () => execAsync(["hyprctl", "dispatch", "workspace", "+1"]),
-			onScrollDown: () => execAsync(["hyprctl", "dispatch", "workspace", "-1"]),
-			child: Box({
-				children: Array.from({ length: fixed }, (_, i) => i + 1)
-					.map(i => WorkspaceBtn(i, indicator)),
-				connections: [[Hyprland, box => {
-					const { workspaces } = Hyprland;
-					const otherWs = getOtherWorkspaces(workspaces, fixed);
+		children: Array.from({ length: fixed }, (_, i) => i + 1)
+			.map(i => WorkspaceBtn(i, indicator)),
+		connections: [[Hyprland, box => {
+			const { workspaces } = Hyprland;
+			const otherWs = getOtherWorkspaces(workspaces, fixed);
 
-					if (otherWs.length > 0) {
-						const otherWsIDs = otherWs.map(ws => ws.id);
-						box.children = Array.from({ length: fixed }, (_, i) => i + 1)
-							.concat(otherWsIDs)
-							.map(i => WorkspaceBtn(i, indicator));
-					} else if (box.children.length > 5) {
-						box.children = Array.from({ length: fixed }, (_, i) => i + 1).map(i => WorkspaceBtn(i, indicator));
-					}
-				}]]
-			})
-		})
+			if (otherWs.length > 0) {
+				const otherWsIDs = otherWs.map(ws => ws.id);
+				box.children = Array.from({ length: fixed }, (_, i) => i + 1)
+					.concat(otherWsIDs)
+					.map(i => WorkspaceBtn(i, indicator));
+			} else if (box.children.length > 5) {
+				box.children = Array.from({ length: fixed }, (_, i) => i + 1).map(i => WorkspaceBtn(i, indicator));
+			}
+		}]]
 	})
 })
 

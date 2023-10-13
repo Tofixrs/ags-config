@@ -41,7 +41,11 @@ const Start = () => Box({
 
 const Center = () => Box({
 	className: 'center',
-	child: DateButton(),
+	children: [
+		SeparatorDot(),
+		DateButton(),
+		SeparatorDot()
+	],
 })
 
 const End = () => Box({

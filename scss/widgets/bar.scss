@@ -1,12 +1,104 @@
+$float: $spacing * 0.7;
+
 @mixin panel_button($flat: false, $reactive: true) {
 	all: unset;
+	transition: $transition;
+	
+	@if $bar-style == "seperated" {
+		> * {
+			@include floating_widget;
+			border-radius: $radii;
+			margin: $wm_gaps $float;
+			transition: $transition;
+		}
+	}
+	label {
+		font-weight: bold;
+	}
 
+	> * {
+		padding: .3em .5em;
+	}
 }
 .panel {
+	@if $bar-style == "seperated" {
+		> .end > button:last-child > * {
+			margin-right: $wm_gaps;
+		}
+
+		> .start > button:first-child > * {
+			margin-left: $wm_gaps;
+		}
+	}
 	separator {
-		background-color: transparentize($base, 0.9);
+		background-color: transparentize(#fff, 0.9);
 		border-radius: $radii;
 		min-height: 5px;
 		min-width: 5px;
+	}
+	.panel-button {
+		@include panel_button($flat: true);
+	}
+	.workspaces {
+		> * { padding: 0; };
+		transition: $transition;
+
+		button {
+			all: unset;
+
+			.indicator {
+				font-size: 0;
+				min-width: 10px;
+				min-height: 10px;
+				border-radius: $radii*0.6;
+ 				border: 2px solid transparent;
+				margin: 0 $spacing/2;
+				transition: $transition/2;
+				background-color: transparentize($crust, 0.8);
+
+				.fill {
+					transition: border-color $transition;
+					border-radius: max(calc($radii * 0.7 - 4px), 0);
+					min-width: 6px;
+					min-height: 6px;
+					margin: 2px;
+				}
+			}
+	  	  	&:first-child .indicator {
+				margin-left: 9px;
+	  	  	}
+	  	  	&:last-child .indicator {
+				margin-right: 9px;
+	  	  	}
+			&.empty .indicator {
+				border-color: transparentize($blue, 0.3);
+	  	  	}
+
+	  	  	&.occupied .indicator {
+				border-color: transparentize($blue, 0.1);
+				.fill {
+		  	  	  	background-color: transparentize($blue, 0.1);
+				}
+	  	  	}
+
+	  	  	&:hover .indicator {
+				border-color: transparentize($mauve, 0.2);
+				.fill {
+		  	  	  	background-color: transparentize($mauve, 0.2);
+				}
+	  	  	}
+
+	  	  	&.active .indicator,
+	  	  	&:active .indicator {
+				border-color: $mauve;
+				.fill {
+		  	  		background-color: $mauve;
+				}
+	  	  	}
+
+	  	  	&.empty .indicator .fill {
+				background-color: transparent;
+	  	  	}
+		}
 	}
 }
