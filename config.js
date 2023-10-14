@@ -1,7 +1,7 @@
 import TopBar from "./js/bar/TopBar.js";
 import { scssWatcher, setupCss } from "./js/utils.js";
 
-const ws = ags.Service.Hyprland.HyprctlGet('monitors');
+const ws = JSON.parse(ags.Utils.exec('hyprctl -j monitors'));
 const forMonitors = widget => ws.map(mon => widget(mon.id));
 
 const scss = ags.App.configDir + "/scss";

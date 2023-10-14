@@ -9,7 +9,7 @@ export default monitor => Window({
 	name: `bar${monitor}`,
 	monitor,
 	exclusive: true,
-	anchor: 'top left right',
+	anchor: ["top", "left", "right"],
 	margin: [5, 10],
 	child: CenterBox({
 		className: "panel",
