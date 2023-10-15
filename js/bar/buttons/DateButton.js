@@ -1,9 +1,9 @@
 import { PanelButton } from "../PanelButton.js";
 import { Clock } from "../../misc/Clock.js"
-const { execAsync } = ags.Utils;
+import { Utils } from "../../imports.js";
 
 export const DateButton = ({ format = "%H:%M %b %e %a" } = {}) => PanelButton({
 	className: 'dashboard',
-	onClicked: () => execAsync("swaync-client -t"),
+	onClicked: () => Utils.execAsync("swaync-client -t"),
 	content: Clock({ format })
 })

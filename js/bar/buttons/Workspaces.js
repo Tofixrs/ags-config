@@ -1,17 +1,15 @@
 import options from "../../options.js"
-const { Box, EventBox, Button, Label } = ags.Widget;
-const { execAsync } = ags.Utils;
-const { Hyprland } = ags.Service;
+import { Widget, Utils, Service } from "../../imports.js";
 
-export const Workspaces = ({ workspaces: fixed = options.workspaces, indicator } = {}) => EventBox({
-	onScrollUp: () => execAsync(["hyprctl", "dispatch", "workspace", "+1"]),
-	onScrollDown: () => execAsync(["hyprctl", "dispatch", "workspace", "-1"]),
+export const Workspaces = ({ workspaces: fixed = options.workspaces, indicator } = {}) => Widget.EventBox({
+	onScrollUp: () => Utils.execAsync(["hyprctl", "dispatch", "workspace", "+1"]),
+	onScrollDown: () => Utils.execAsync(["hyprctl", "dispatch", "workspace", "-1"]),
 	className: "workspaces panel-button",
-	child: Box({
+	child: Widget.Box({
 		children: Array.from({ length: fixed }, (_, i) => i + 1)
 			.map(i => WorkspaceBtn(i, indicator)),
-		connections: [[Hyprland, box => {
-			const { workspaces } = Hyprland;
+		connections: [[Service.Hyprland, box => {
+			const { workspaces } = Service.Hyprland;
 			const otherWs = getOtherWorkspaces(workspaces, fixed);
 
 			if (otherWs.length > 0) {
@@ -26,12 +24,12 @@ export const Workspaces = ({ workspaces: fixed = options.workspaces, indicator }
 	})
 })
 
-const WorkspaceBtn = (id, indicator) => Button({
-	onClicked: () => execAsync(`hyprctl dispatch workspace ${id}`),
-	child: indicator ? indicator() : Label(`${id}`),
-	connections: [[Hyprland, btn => {
-		const { workspaces, active } = Hyprland;
-		const occupied = Hyprland.getWorkspace(id)?.windows > 0;
+const WorkspaceBtn = (id, indicator) => Widget.Button({
+	onClicked: () => Utils.execAsync(`hyprctl dispatch workspace ${id}`),
+	child: indicator ? indicator() : Widget.Label(`${id}`),
+	connections: [[Service.Hyprland, btn => {
+		const { active } = Service.Hyprland;
+		const occupied = Service.Hyprland.getWorkspace(id)?.windows > 0;
 		btn.toggleClassName('active', active.workspace.id === id);
 		btn.toggleClassName('occupied', occupied);
 		btn.toggleClassName('empty', !occupied);

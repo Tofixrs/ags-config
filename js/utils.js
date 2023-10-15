@@ -1,5 +1,7 @@
+import { Utils } from "./imports.js";
+
 export function scssWatcher(scss, css) {
-	return ags.Utils.subprocess([
+	return Utils.subprocess([
 		"inotifywait",
 		"--recursive",
 		"--event", "create,modify",
@@ -8,6 +10,6 @@ export function scssWatcher(scss, css) {
 }
 
 export function setupCss(scss, css) {
-	ags.Utils.exec(`mkdir ${css}`);
-	ags.Utils.exec(`sass ${scss + "/main.scss"} ${css + "/main.css"}`);
+	Utils.exec(`mkdir ${css}`);
+	Utils.exec(`sass ${scss + "/main.scss"} ${css + "/main.css"}`);
 }

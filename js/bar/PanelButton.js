@@ -1,7 +1,7 @@
-const { Box, Button } = ags.Widget;
+import { Widget } from "../imports.js";
 
-export const PanelButton = ({ className, content, ...props }) => Button({
+export const PanelButton = ({ className, content, ...props }) => Widget.Button({
 	className: `panel-button ${className}`,
-	child: Box({ child: content }),
+	child: Widget.Box({ child: content }),
 	...props
 })

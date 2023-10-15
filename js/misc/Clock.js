@@ -1,11 +1,11 @@
-const { Label } = ags.Widget;
+import { Widget } from "../imports.js";
 const { DateTime } = imports.gi.GLib;
 
 export const Clock = ({
 	format = '%H:%M:%S %B %e. %A',
 	interval = 1000,
 	...props
-} = {}) => Label({
+} = {}) => Widget.Label({
 	className: 'clock',
 	...props,
 	connections: [[interval, label =>

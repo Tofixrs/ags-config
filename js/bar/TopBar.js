@@ -1,17 +1,19 @@
 import { DateButton } from "./buttons/DateButton.js";
 import { Workspaces } from "./buttons/Workspaces.js"
 import { Separator } from "../misc/Separator.js";
-const { Window, CenterBox, Box } = ags.Widget;
+import { PowerButton } from "./buttons/PowerButton.js";
+import { Widget } from "../imports.js";
+import { SysStatus } from "./buttons/SysStatus.js";
 
 
 
-export default monitor => Window({
+export default monitor => Widget.Window({
 	name: `bar${monitor}`,
 	monitor,
 	exclusive: true,
 	anchor: ["top", "left", "right"],
 	margin: [5, 10],
-	child: CenterBox({
+	child: Widget.CenterBox({
 		className: "panel",
 		startWidget: Start(),
 		centerWidget: Center(),
@@ -25,21 +27,21 @@ const SeparatorDot = (service, condition) => Separator({
 	connections: service && [[service, dot => dot.visible = condition()]],
 });
 
-const Start = () => Box({
+const Start = () => Widget.Box({
 	className: 'start',
 	children: [
 		SeparatorDot(),
 		Workspaces({
-			indicator: () => Box({
+			indicator: () => Widget.Box({
 				className: "indicator",
 				valign: "center",
-				child: Box({ className: "fill" })
+				child: Widget.Box({ className: "fill" })
 			})
 		})
 	]
 })
 
-const Center = () => Box({
+const Center = () => Widget.Box({
 	className: 'center',
 	children: [
 		SeparatorDot(),
@@ -48,6 +50,12 @@ const Center = () => Box({
 	],
 })
 
-const End = () => Box({
+const End = () => Widget.Box({
 	className: 'end',
+	children: [
+		Widget.Box({ hexpand: true }),
+		SysStatus(),
+		SeparatorDot(),
+		PowerButton()
+	]
 })
