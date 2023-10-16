@@ -1,0 +1,20 @@
+.powermenu, .verification {
+	@include floating-widget;
+	background-color: $crust;
+	padding: 15px;
+	border-radius: 7.5px;
+}
+
+.powermenu > * {
+	margin: 0 15px;
+}
+
+.verification {
+	label {
+		font-size: 25px;
+	}
+	button {
+		margin: 15px;
+	}
+}
+

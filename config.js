@@ -3,6 +3,7 @@ import { scssWatcher, setupCss } from "./js/utils.js";
 import { Utils, App } from "./js/imports.js";
 import PowerMenu from "./js/powermenu/PowerMenu.js";
 import Verification from "./js/powermenu/Verification.js";
+import QuickSettings from "./js/quicksettings/QuickSettings.js";
 
 const ws = JSON.parse(Utils.exec('hyprctl -j monitors'));
 const forMonitors = widget => ws.map(mon => widget(mon.id));
@@ -18,6 +19,7 @@ export default {
 		forMonitors(TopBar),
 		PowerMenu(),
 		Verification(),
+		QuickSettings()
 	].flat(2),
 	style: css + "/main.css",
 }

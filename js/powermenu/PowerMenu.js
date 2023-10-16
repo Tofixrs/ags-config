@@ -1,14 +1,15 @@
-import { Widget, App } from "../imports.js"
+import { Widget } from "../imports.js"
 import PowerMenu from "../services/powermenu.js"
 import PopupWindow from "../misc/PopupWindow.js"
+import icons from "../icons.js";
 
 
-const SysButton = (action, label) => Widget.Button({
+const SysButton = (action, icon) => Widget.Button({
 	onClicked: () => { PowerMenu.action(action) },
 	child: Widget.Box({
 		vertical: true,
 		children: [
-			Widget.Label(label),
+			Widget.Icon({ icon, size: 100 }),
 		],
 	}),
 });
@@ -20,10 +21,10 @@ export default () => PopupWindow({
 		className: "powermenu",
 		homogeneous: true,
 		children: [
-			SysButton('sleep', 'Sleep'),
-			SysButton('reboot', 'Reboot'),
-			SysButton('logout', 'Log Out'),
-			SysButton('shutdown', 'Shutdown'),
+			SysButton('sleep', icons.powerMenu.sleep),
+			SysButton('reboot', icons.powerMenu.reboot),
+			SysButton('logout', icons.powerMenu.logout),
+			SysButton('shutdown', icons.powerMenu.shutdown),
 		]
 	})
 })
