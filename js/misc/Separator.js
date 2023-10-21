@@ -1,6 +1,7 @@
 import Gtk from 'gi://Gtk';
+import { Widget } from '../imports.js';
 
-export const Separator = ({ orientation = 'vertical', ...rest } = {}) => ags.Widget({
+export const Separator = ({ orientation = 'vertical', ...rest } = {}) => Widget({
 	...rest,
 	type: Gtk.Separator,
 	orientation: Gtk.Orientation[orientation.toUpperCase()],

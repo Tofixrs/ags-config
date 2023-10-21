@@ -1,5 +1,5 @@
 import options from "../../options.js"
-import { Widget, Utils, Service } from "../../imports.js";
+import { Widget, Utils, Service, Hyprland } from "../../imports.js";
 
 export const Workspaces = ({ workspaces: fixed = options.workspaces, indicator } = {}) => Widget.EventBox({
 	onScrollUp: () => Utils.execAsync(["hyprctl", "dispatch", "workspace", "+1"]),
@@ -8,8 +8,8 @@ export const Workspaces = ({ workspaces: fixed = options.workspaces, indicator }
 	child: Widget.Box({
 		children: Array.from({ length: fixed }, (_, i) => i + 1)
 			.map(i => WorkspaceBtn(i, indicator)),
-		connections: [[Service.Hyprland, box => {
-			const { workspaces } = Service.Hyprland;
+		connections: [[Hyprland, (box, ...args) => {
+			const { workspaces } = Hyprland;
 			const otherWs = getOtherWorkspaces(workspaces, fixed);
 
 			if (otherWs.length > 0) {
@@ -27,9 +27,9 @@ export const Workspaces = ({ workspaces: fixed = options.workspaces, indicator }
 const WorkspaceBtn = (id, indicator) => Widget.Button({
 	onClicked: () => Utils.execAsync(`hyprctl dispatch workspace ${id}`),
 	child: indicator ? indicator() : Widget.Label(`${id}`),
-	connections: [[Service.Hyprland, btn => {
-		const { active } = Service.Hyprland;
-		const occupied = Service.Hyprland.getWorkspace(id)?.windows > 0;
+	connections: [[Hyprland, (btn, ...args) => {
+		const { active } = Hyprland;
+		const occupied = Hyprland.getWorkspace(id)?.windows > 0;
 		btn.toggleClassName('active', active.workspace.id === id);
 		btn.toggleClassName('occupied', occupied);
 		btn.toggleClassName('empty', !occupied);
