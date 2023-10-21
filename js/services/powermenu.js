@@ -14,7 +14,7 @@ class PowerMenu extends Service {
 	action(action) {
 		[this._cmd, this._title] = {
 			'sleep': ["systemctl suspend", "Sleep"],
-			"logout": ["pkill dbus-run-session", "Log out"],
+			"logout": ["hyprctl dispatch exit", "Log out"],
 			"shutdown": ["shutdown now", "Shutdown"],
 			"reboot": ["systemctl reboot", "Reboot"],
 		}[action];

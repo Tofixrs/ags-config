@@ -1,6 +1,6 @@
 export default {
 	prefferedMpris: 'spotify',
 	workspaces: 5,
-	windowAnimationDuration: 200,
+	windowAnimationDuration: 500,
 }
 

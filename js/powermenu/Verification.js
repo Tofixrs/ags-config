@@ -29,7 +29,7 @@ export default () => PopupWindow({
 					}),
 					Widget.Button({
 						child: Widget.Label('Yes'),
-						onClicked: () => { Utils.exec(PowerMenu.cmd); App.closeWindow('verification') },
+						onClicked: () => Utils.exec(PowerMenu.cmd),
 					}),
 				],
 			}),

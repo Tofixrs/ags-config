@@ -1,0 +1,18 @@
+.quicksettings {
+	@include floating_widget;
+	min-width: 350px;
+	min-height: 500px;
+
+	.row {
+		@include floating_widget;
+		background-color: $crust;
+		padding: 2.5px;
+		margin: 0px;
+	}
+
+	.slider-box {
+		scale {
+			@include slider;
+		}
+	}		
+}

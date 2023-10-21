@@ -29,3 +29,24 @@ window {
     color: $text;
     padding: $popover-padding;
 }
+
+@mixin slider($width: .7em, $slider_width: .5em, $slider: true, $focusable: true, $radii: $radii){
+    @include common;
+    * { all:unset; }
+
+    trough{
+        highlight, progress{
+        	background-color: $pink;
+    		min-height: $width;
+    		min-width: $width;
+    		border-radius: 15px;
+    		margin: 0px 10px;
+        }
+    }
+    indicator {
+    	border: 200px solid red;
+    }
+
+    slider {
+    }
+}

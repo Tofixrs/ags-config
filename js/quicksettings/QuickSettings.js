@@ -1,5 +1,6 @@
 import { Widget } from "../imports.js"
 import PopupWindow from "../misc/PopupWindow.js"
+import SpeakerSlider from "./widgets/Volume.js";
 
 const Row = (toggles, menus = []) => Widget.Box({
 	className: 'row',
@@ -19,6 +20,16 @@ export default () => PopupWindow({
 	content: Widget.Box({
 		className: 'quicksettings',
 		vertical: true,
-		children: [],
+		children: [
+			Row([
+				Widget.Box({
+					className: "slider-box",
+					vertical: true,
+					children: [
+						Row([SpeakerSlider()])
+					]
+				})
+			])
+		],
 	}),
 });
