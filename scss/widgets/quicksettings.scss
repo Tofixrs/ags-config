@@ -6,8 +6,8 @@
 	.row {
 		@include floating_widget;
 		background-color: $crust;
-		padding: 2.5px;
-		margin: 0px;
+		padding: 10px;
+		margin: 2.5px;
 	}
 
 	.slider-box {
@@ -15,4 +15,37 @@
 			@include slider;
 		}
 	}		
+	
+	.menu {
+		.title {
+			margin: 10px 5px;	
+		}
+	}
+	.sink-item {
+		margin: 7px 20px;
+	}
+	.app-mixer {
+		.mixer-item {
+			margin: 0px 10px;
+			margin-bottom: 10px;
+			.title-box {
+				margin: 5px 0px;
+			}
+			.mixer-slider progress, highlight {
+				margin: 0px;
+			}
+		}
+	}
+	separator.vertical {
+		background-color: transparentize(#fff, 0.9);
+		border-radius: $radii;
+		min-height: 5px;
+		min-width: 5px;
+		margin: 10px 7px;
+	}
+	.wifi-select {
+		.access-point {
+			margin: 5px;
+		}
+	}
 }

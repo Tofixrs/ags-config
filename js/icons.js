@@ -27,4 +27,29 @@ export default {
 		logout: 'system-log-out-symbolic',
 		shutdown: 'system-shutdown-symbolic',
 	},
+	ui: {
+		arrow: {
+			right: 'pan-end-symbolic',
+			left: 'pan-start-symbolic',
+			down: 'pan-down-symbolic',
+			up: 'pan-up-symbolic',
+		},
+	},
+	mpris: {
+		fallback: 'audio-x-generic-symbolic',
+		shuffle: {
+			enabled: '󰒟',
+			disabled: '󰒟',
+		},
+		loop: {
+			none: '󰓦',
+			track: '󰓦',
+			playlist: '󰑐',
+		},
+		playing: '󰏦',
+		paused: '󰐍',
+		stopped: '󰐍',
+		prev: '󰒮',
+		next: '󰒭',
+	},
 }

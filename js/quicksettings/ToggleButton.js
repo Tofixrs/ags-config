@@ -3,7 +3,6 @@ import { Separator } from "../misc/Separator.js";
 import { Utils, Widget, App, Variable } from "../imports.js";
 
 export const opened = Variable("");
-console.log(App)
 App.connect('window-toggled', (_, name, visible) => {
 	if (name === 'quicksettings' && !visible)
 		Utils.timeout(500, () => opened.value = '');
@@ -19,8 +18,8 @@ export const Menu = ({ name, icon, title, content }) => Widget.Revealer({
 		vertical: true,
 		children: [
 			Widget.Box({
-				clsssNAme: "title",
-				children: [icon, title],
+				className: "title",
+				children: [icon, Separator(), title],
 			}),
 			Separator({ orientation: 'horizontal' }), ,
 			Widget.Box({
@@ -68,7 +67,7 @@ export const ArrowToggleButton = ({
 		Widget.Button({
 			child: Widget.Box({
 				hexpand: true,
-				children: [icon, label],
+				children: [icon, Separator(), label],
 			}),
 			onClicked: () => {
 				if (condition()) {
@@ -84,3 +83,16 @@ export const ArrowToggleButton = ({
 	],
 });
 
+export const SimpleToggleButton = ({
+	icon, label, toggle,
+	connection: [service, condition],
+}) => Widget.Button({
+	className: 'simple-toggle',
+	connections: [[service, box => {
+		box.toggleClassName('active', condition());
+	}]],
+	child: Widget.Box({
+		children: [icon, label],
+	}),
+	onClicked: toggle,
+});

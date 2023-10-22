@@ -1,6 +1,8 @@
 import { Widget } from "../imports.js"
 import PopupWindow from "../misc/PopupWindow.js"
-import SpeakerSlider from "./widgets/Volume.js";
+import { BluetoothDevices, BluetoothToggle } from "./widgets/Bluetooth.js";
+import { NetworkToggle, WifiSelection } from "./widgets/Network.js";
+import SpeakerSlider, { AppMixer, SinkSelector } from "./widgets/Volume.js";
 
 const Row = (toggles, menus = []) => Widget.Box({
 	className: 'row',
@@ -21,15 +23,14 @@ export default () => PopupWindow({
 		className: 'quicksettings',
 		vertical: true,
 		children: [
-			Row([
-				Widget.Box({
-					className: "slider-box",
-					vertical: true,
-					children: [
-						Row([SpeakerSlider()])
-					]
-				})
-			])
+			Widget.Box({
+				className: "slider-box",
+				vertical: true,
+				children: [
+					Row([SpeakerSlider()], [SinkSelector(), AppMixer()]),
+				]
+			}),
+			Row([NetworkToggle(), BluetoothToggle()], [WifiSelection(), BluetoothDevices()])
 		],
 	}),
 });
