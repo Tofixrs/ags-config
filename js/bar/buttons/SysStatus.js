@@ -3,8 +3,8 @@ import { Widget, Battery, Network, Audio, Bluetooth, App } from "../../imports.j
 import icons from "../../icons.js";
 
 export const SysStatus = () => PanelButton({
-	className: "sys-stat",
-	onClicked: () => App.toggleWindow("quicksettings"),
+	class_name: "sys-stat",
+	on_clicked: () => App.toggleWindow("quicksettings"),
 	content: Widget.Box({
 		children: [
 			AudioIndicator(),
@@ -17,7 +17,7 @@ export const SysStatus = () => PanelButton({
 })
 
 const BatteryProgress = () => Widget.Label({
-	className: "batteryIndicator",
+	class_name: "batteryIndicator",
 	connections: [[Battery, self => {
 		if (!Battery.available) return self.label = "";
 		let icon = getBatteryIcon(Battery.percent, Battery.charging);
@@ -64,7 +64,7 @@ const MicrophoneMuteIndicator = () => Widget.Icon({
 });
 
 const BluetoothIndicator = () => Widget.Icon({
-	className: 'bluetooth',
+	class_name: 'bluetooth',
 	icon: icons.bluetooth.enabled,
 	binds: [['visible', Bluetooth, 'enabled']],
 });

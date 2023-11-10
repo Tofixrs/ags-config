@@ -1,6 +1,5 @@
 import { DateButton } from "./buttons/DateButton.js";
 import { Workspaces } from "./buttons/Workspaces.js"
-import { Separator } from "../misc/Separator.js";
 import { PowerButton } from "./buttons/PowerButton.js";
 import { Widget } from "../imports.js";
 import { SysStatus } from "./buttons/SysStatus.js";
@@ -14,35 +13,36 @@ export default monitor => Widget.Window({
 	anchor: ["top", "left", "right"],
 	margin: [5, 10],
 	child: Widget.CenterBox({
-		className: "panel",
+		class_name: "panel",
 		startWidget: Start(),
 		centerWidget: Center(),
 		endWidget: End(),
 	})
 })
 
-const SeparatorDot = (service, condition) => Separator({
+const SeparatorDot = (service, condition) => Widget.MySeparator({
 	orientation: 'vertical',
 	valign: 'center',
-	connections: service && [[service, dot => dot.visible = condition()]],
+	connections: service && [[service, dot => dot.visible = condition()]] || null,
 });
 
 const Start = () => Widget.Box({
-	className: 'start',
+	class_name: 'start',
 	children: [
 		SeparatorDot(),
 		Workspaces({
 			indicator: () => Widget.Box({
-				className: "indicator",
+				class_name: "indicator",
 				valign: "center",
-				child: Widget.Box({ className: "fill" })
+				hexpand: false,
+				child: Widget.Box({ class_name: "fill" })
 			})
 		})
 	]
 })
 
 const Center = () => Widget.Box({
-	className: 'center',
+	class_name: 'center',
 	children: [
 		SeparatorDot(),
 		DateButton(),
@@ -51,7 +51,7 @@ const Center = () => Widget.Box({
 })
 
 const End = () => Widget.Box({
-	className: 'end',
+	class_name: 'end',
 	children: [
 		Widget.Box({ hexpand: true }),
 		SysStatus(),

@@ -1,8 +1,6 @@
 import icons from '../../icons.js';
 import { Menu, ArrowToggleButton } from '../ToggleButton.js';
 import { Network, Widget } from '../../imports.js';
-import { Separator } from '../../misc/Separator.js';
-import Gtk from 'gi://Gtk';
 
 export const NetworkToggle = () => ArrowToggleButton({
 	name: 'network',
@@ -33,25 +31,22 @@ export const WifiSelection = () => Menu({
 		}]],
 	}),
 	title: Widget.Label('Wifi Selection'),
-	content: Widget({
-		type: Gtk.ScrolledWindow,
+	content: Widget.ScrolledWindow({
 		"min-content-height": 300,
-		className: "wifi-select",
+		class_name: "wifi-select",
 		child: Widget.Box({
 			vertical: true,
 			connections: [[Network, box => box.children =
-				Network.wifi?.accessPoints.map(ap => Widget.Button({
-					className: "access-point",
-					onClicked: `nmcli device wifi connect ${ap.bssid}`,
+				Network.wifi?.access_points.map(ap => Widget.Button({
+					on_clicked: () => Utils.execAsync(`nmcli device wifi connect ${ap.bssid}`),
 					child: Widget.Box({
 						children: [
 							Widget.Icon(ap.iconName),
-							Separator(),
-							Widget.Label(ap.ssid),
+							Widget.Label(ap.ssid || ''),
 							ap.active && Widget.Icon({
 								icon: icons.tick,
 								hexpand: true,
-								halign: 'end',
+								hpack: 'end',
 							}),
 						],
 					}),

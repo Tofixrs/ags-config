@@ -6,19 +6,19 @@ export default () => PopupWindow({
 	name: 'verification',
 	expand: true,
 	content: Widget.Box({
-		className: 'verification',
+		class_name: 'verification',
 		vertical: true,
 		children: [
 			Widget.Label({
-				className: 'title',
+				class_name: 'title',
 				binds: [['label', PowerMenu, 'title']],
 			}),
 			Widget.Label({
-				className: 'desc',
+				class_name: 'desc',
 				label: 'Are you sure?',
 			}),
 			Widget.Box({
-				className: 'buttons',
+				class_name: 'buttons',
 				vexpand: true,
 				valign: 'end',
 				homogeneous: true,

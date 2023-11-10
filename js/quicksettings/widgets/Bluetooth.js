@@ -37,10 +37,9 @@ export const BluetoothDevices = () => Menu({
 	name: 'bluetooth',
 	icon: Widget.Icon(icons.bluetooth.disabled),
 	title: Widget.Label('Bluetooth'),
-	content: Widget({
-		type: Gtk.ScrolledWindow,
+	content: Widget.ScrolledWindow({
 		"min-content-height": 300,
-		className: "bluetooth-select",
+		class_name: "bluetooth-select",
 		child: Widget.Box({
 			vertical: true,
 			connections: [[Bluetooth, box => {
@@ -52,8 +51,7 @@ export const BluetoothDevices = () => Menu({
 							Widget.Label(device.name),
 							device.batteryPercentage > 0 && Widget.Label(`${device.batteryPercentage}%`),
 							Widget.Box({ hexpand: true }),
-							device.connecting ? Spinner() : Widget({
-								type: Gtk.Switch,
+							device.connecting ? Spinner() : Widget.Switch({
 								active: device.connected,
 								connections: [['notify::active', ({ active }) => {
 									device.setConnection(active);

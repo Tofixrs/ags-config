@@ -1,31 +1,24 @@
 import options from "../../options.js"
-import { Widget, Utils, Service, Hyprland } from "../../imports.js";
+import { Widget, Utils, Hyprland } from "../../imports.js";
+
+const dispatch = arg => () => Utils.execAsync(`hyprctl dispatch workspace ${arg}`);
 
 export const Workspaces = ({ workspaces: fixed = options.workspaces, indicator } = {}) => Widget.EventBox({
-	onScrollUp: () => Utils.execAsync(["hyprctl", "dispatch", "workspace", "+1"]),
-	onScrollDown: () => Utils.execAsync(["hyprctl", "dispatch", "workspace", "-1"]),
-	className: "workspaces panel-button",
+	on_scroll_up: () => dispatch("+1"),
+	on_scroll_down: () => dispatch("-1"),
+	class_name: "workspaces panel-button",
 	child: Widget.Box({
-		children: Array.from({ length: fixed }, (_, i) => i + 1)
+		children: Array.from({ length: 10 }, (_, i) => i + 1)
 			.map(i => WorkspaceBtn(i, indicator)),
-		connections: [[Hyprland, (box, ...args) => {
-			const { workspaces } = Hyprland;
-			const otherWs = getOtherWorkspaces(workspaces, fixed);
-
-			if (otherWs.length > 0) {
-				const otherWsIDs = otherWs.map(ws => ws.id);
-				box.children = Array.from({ length: fixed }, (_, i) => i + 1)
-					.concat(otherWsIDs)
-					.map(i => WorkspaceBtn(i, indicator));
-			} else if (box.children.length > 5) {
-				box.children = Array.from({ length: fixed }, (_, i) => i + 1).map(i => WorkspaceBtn(i, indicator));
-			}
-		}]]
+		connections: [[Hyprland.active.workspace, box => box.children.map(btn => {
+			btn.visible = Hyprland.workspaces.some(ws => ws.id === btn.id) || btn.id <= fixed;
+		})]],
 	})
 })
 
 const WorkspaceBtn = (id, indicator) => Widget.Button({
-	onClicked: () => Utils.execAsync(`hyprctl dispatch workspace ${id}`),
+	on_clicked: () => dispatch(id),
+	setup: btn => btn.id = id,
 	child: indicator ? indicator() : Widget.Label(`${id}`),
 	connections: [[Hyprland, (btn, ...args) => {
 		const { active } = Hyprland;
@@ -35,9 +28,4 @@ const WorkspaceBtn = (id, indicator) => Widget.Button({
 		btn.toggleClassName('empty', !occupied);
 	}]]
 })
-
-
-function getOtherWorkspaces(workspaces, fixed) {
-	return workspaces.filter(workspace => workspace.id > fixed)
-}
 

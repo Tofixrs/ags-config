@@ -31,10 +31,12 @@ $float: $spacing * 0.7;
 		}
 	}
 	separator {
+		margin-top: 17px;
+		margin-bottom: 16.9999px;
+		min-width: 5px;
+		min-height: 5px;
 		background-color: transparentize(#fff, 0.9);
 		border-radius: $radii;
-		min-height: 5px;
-		min-width: 5px;
 	}
 	.panel-button {
 		@include panel_button($flat: true);
@@ -45,7 +47,9 @@ $float: $spacing * 0.7;
 
 		button {
 			all: unset;
-
+			
+			padding-top: 11px;
+			padding-bottom: 11px;
 			.indicator {
 				font-size: 0;
 				min-width: 10px;

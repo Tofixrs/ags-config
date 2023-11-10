@@ -1,7 +1,7 @@
 import { Widget } from "../imports.js";
 
-export const PanelButton = ({ className, content, ...props }) => Widget.Button({
-	className: `panel-button ${className}`,
+export const PanelButton = ({ class_name, content, ...props }) => Widget.Button({
+	class_name: `panel-button ${class_name}`,
 	child: Widget.Box({ child: content }),
 	...props
 })

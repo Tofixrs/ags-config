@@ -9,7 +9,7 @@ export const FontIcon = ({ icon = "", ...props }) => Widget.Label({
 
 export const DistroIcon = props => FontIcon({
 	...props,
-	className: "distro-icon",
+	class_name: "distro-icon",
 	icon: (() => {
 		const distro = Utils.exec(`bash -c "cat /etc/os-release | grep '^ID' | head -n 1 | cut -d '=' -f2"`)
 			.toLowerCase();

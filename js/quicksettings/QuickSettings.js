@@ -5,7 +5,7 @@ import { NetworkToggle, WifiSelection } from "./widgets/Network.js";
 import SpeakerSlider, { AppMixer, SinkSelector } from "./widgets/Volume.js";
 
 const Row = (toggles, menus = []) => Widget.Box({
-	className: 'row',
+	class_name: 'row',
 	vertical: true,
 	children: [
 		Widget.Box({
@@ -20,11 +20,11 @@ export default () => PopupWindow({
 	anchor: ['top', 'right'],
 	layout: 'top right',
 	content: Widget.Box({
-		className: 'quicksettings',
+		class_name: 'quicksettings',
 		vertical: true,
 		children: [
 			Widget.Box({
-				className: "slider-box",
+				class_name: "slider-box",
 				vertical: true,
 				children: [
 					Row([SpeakerSlider()], [SinkSelector(), AppMixer()]),

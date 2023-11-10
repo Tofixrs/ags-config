@@ -5,7 +5,7 @@ import icons from "../icons.js";
 
 
 const SysButton = (action, icon) => Widget.Button({
-	onClicked: () => { PowerMenu.action(action) },
+	on_clicked: () => { PowerMenu.action(action) },
 	child: Widget.Box({
 		vertical: true,
 		children: [
@@ -18,7 +18,7 @@ export default () => PopupWindow({
 	expand: true,
 	name: "powermenu",
 	content: Widget.Box({
-		className: "powermenu",
+		class_name: "powermenu",
 		homogeneous: true,
 		children: [
 			SysButton('sleep', icons.powerMenu.sleep),
