@@ -1,7 +1,5 @@
 {
-  lib,
   stdenv,
-  buildNpmPackage,
   pkgs,
 }:
 stdenv.mkDerivation {
@@ -23,6 +21,7 @@ stdenv.mkDerivation {
     runHook preInstall
 
     cp -r dist $out/
+    cp -r css $out/
 
     runHook postInstall
   '';
