@@ -1,0 +1,75 @@
+@import url("../theme.css");
+
+.panel {
+  background-color: @base00;
+  border-radius: 15px;
+  min-height: 20px;
+  min-width: 20px;
+  padding-left: 15px;
+  padding-right: 15px;
+
+  font-size:15px;
+}
+
+.sep-dot {
+  min-height: 5px;
+  min-width: 5px;
+  border-radius: 50%;
+  margin: 5px;
+}
+
+.panel .module {
+  border-radius: 5px;
+  min-height: 10px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  padding: 5px 10px;
+  background-color: @base02;
+}
+
+.ws-indicator {
+  all: unset;
+  border-radius: 50%;
+
+  min-height: 3px;
+  min-width: 3px;
+
+  background-color: @base04;
+  transition: 400ms min-width;
+  transition: 400ms min-height;
+  margin: 0px 5px;
+}
+
+
+.ws-indicator.occupied {
+  background-color: @base0D;
+  border-radius: 2px;
+  min-width: 8px;
+  min-height: 8px;
+}
+
+.ws-indicator.active, .ws-indicator:hover {
+  background-color: @base0E;
+  border-radius: 2px;
+  min-width: 10px;
+  min-height: 10px;
+}
+
+.panel .module.power {
+  padding: 5px;
+}
+
+.power image {
+  padding: 3px;
+  color: @base08;
+}
+
+.volume {
+  min-width: 20px;
+  min-height: 20px;
+  font-size: 2px;
+}
+
+.volume .vol-icon {
+  font-size: 14px;
+}

@@ -1,0 +1,109 @@
+@import url("../theme.css");
+
+.controlcenter {
+	background-color: @base00;
+	min-height: 500px;
+	min-width: 400px;
+	border-radius: 15px;
+	border-radius: 15px;
+	margin: 10px;
+	box-shadow: 0px 0px 5px 5px @base01; 
+}
+
+.controlcenter .module{
+	all: unset;
+}
+
+.controlcenter .group {
+	border-radius: 15px;
+	min-width: unset;
+	background-color: @base02;
+	padding: 7px;
+	margin: 5px 10px 0px;
+}
+
+.controlcenter .menu {
+	border-radius: 15px;
+	margin-top: 10px;
+	padding: 5px 5px;
+	background-color: @base03;
+}
+
+.controlcenter .menu separator {
+	min-height: 2px;
+	min-width: 2px;
+	border-radius: 15px;
+	margin: 1px 5px;
+}
+
+.controlcenter .vol-indicator {
+	background-color: transparent;
+}
+
+.controlcenter .vol-slider {
+	margin: 0px 10px;
+}
+
+.controlcenter .arrow {
+	background-color: transparent;
+}
+
+.controlcenter scale {
+	border-radius: 15px;
+}
+
+/*Behind scale*/
+.controlcenter scale trough {
+	border-radius: 15px;
+	background-color: @base04;
+}
+
+
+/*slider itself*/
+.controlcenter scale trough highlight,
+.controlcenter scale trough fill
+{
+	min-height: .45em;
+	border-radius: 15px;
+}
+
+.controlcenter scale slider {
+	box-shadow: 0 0 0 2px @base0E;
+}
+
+.controlcenter scale highlight {
+	background-color: @base0E;
+	background-image: unset;
+}
+
+.controlcenter .menu-list-item {
+	margin: 2.5px 10px;
+	background-color: @base02;
+	padding: 10px 15px 10px 10px;
+	border-radius: 15px;
+}
+
+.vertical-sep {
+	min-height: 20px;
+	min-width: 20px;
+	border-radius: 50%;
+}
+
+
+.controlcenter .toggle-button {
+	border-radius: 15px;
+	background-color: @base03;
+}
+.controlcenter .toggle-button.active {
+	background-color: @base0E;
+	color: black;
+}
+
+.controlcenter .toggle-button.active * {
+	color: black;
+}
+.controlcenter .toggle-button button {
+	background-color: transparent;
+	border-radius: 15px;
+}
+
