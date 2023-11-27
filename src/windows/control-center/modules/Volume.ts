@@ -51,7 +51,7 @@ function AppMixer() {
 			"min_content_height": 25,
 			vpack: "end",
 			connections: [[Audio, self => {
-				self["min_content_height"] = Math.min(300, apps.value * 55);
+				self["min_content_height"] = Math.min(300, apps.value * 47.5);
 			}]],
 			child: Widget.Box({
 				vertical: true,

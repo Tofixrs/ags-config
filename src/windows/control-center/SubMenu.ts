@@ -83,6 +83,7 @@ export const ArrowToggleButton = ({
 	children: [
 		Widget.Button({
 			class_names: ["btn"],
+
 			child: Widget.Box({
 				hexpand: true,
 				children: [icon, SeperatorDot(), label],

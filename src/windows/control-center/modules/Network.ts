@@ -62,7 +62,7 @@ export const WifiSelection = () => Menu("network", [
 					child: Widget.Box({
 						children: [
 							Widget.Icon(ap.iconName),
-							Widget.Label(ap.ssid || ''),
+							Widget.Label(ap.ssid || ""),
 							...(ap.active ? [Widget.Icon({ icon: icons.ui.tick, hexpand: true, hpack: "end" })] as Gtk.Widget[] : [])
 						]
 					}),
