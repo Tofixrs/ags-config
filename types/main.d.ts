@@ -1,1 +1,1 @@
-export declare function main(args: string[]): any;
+export declare function main(args: string[]): void | Promise<number>;
