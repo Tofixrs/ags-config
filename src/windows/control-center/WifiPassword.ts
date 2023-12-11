@@ -24,7 +24,7 @@ export function PasswordInput() {
 					caps_lock_warning: true,
 					on_accept: (self) => {
 						App.closeWindow("password-input");
-						WifiPassword.connectWithPassword(self.text);
+						WifiPassword.connectWithPassword(self.text ? self.text : "");
 					},
 				})
 			]

@@ -1,6 +1,7 @@
 import Widget from 'resource:///com/github/Aylur/ags/widget.js';
 import icons from '../../../icons.js';
 import { Menu, ArrowToggleButton } from '../SubMenu.js';
+//@ts-ignore
 import Bluetooth from "resource:///com/github/Aylur/ags/service/bluetooth.js";
 
 export const BluetoothToggle = () => ArrowToggleButton({
@@ -32,11 +33,11 @@ export const BluetoothToggle = () => ArrowToggleButton({
 	activate: () => Bluetooth.enabled = true,
 });
 
-const DeviceItem = device => Widget.Box({
+const DeviceItem = (device: any) => Widget.Box({
 	class_names: ["menu-list-item"],
 	children: [
 		Widget.Icon(device.icon_name + '-symbolic'),
-		Widget.Label(device.name),
+		Widget.Label({ label: device.name, max_width_chars: 10 }),
 		Widget.Label({
 			label: `${device.battery_percentage}%`,
 			binds: [['visible', device, 'battery-percentage', p => p > 0]],

@@ -35,7 +35,7 @@ export interface BaseProps<Self> extends Gtk.Widget.ConstructorProperties {
 }
 type WidgetCtor = new (...args: any[]) => Gtk.Widget;
 export default function <T extends WidgetCtor>(Widget: T, GTypeName?: string): {
-    new (...args: any[]): {
+    new(...args: any[]): {
         _init(config?: Gtk.Widget.ConstructorProperties): void;
         _destroyed: boolean;
         _get<T>(field: string): T;
@@ -842,4 +842,4 @@ export default function <T extends WidgetCtor>(Widget: T, GTypeName?: string): {
         vfunc_set_name(name: string | null): void;
     };
 } & T;
-export {};
+export { };

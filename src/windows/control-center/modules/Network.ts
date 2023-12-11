@@ -18,6 +18,7 @@ export const NetworkToggle = () => ArrowToggleButton({
 	}),
 	label: Widget.Label({
 		truncate: 'end',
+		max_width_chars: 10,
 		connections: [[NetworkService, label => {
 			label.label = NetworkService.wifi?.ssid || 'Not Connected';
 		}]],
@@ -72,5 +73,4 @@ export const WifiSelection = () => Menu("network", [
 		})
 	})
 ]);
-
 
