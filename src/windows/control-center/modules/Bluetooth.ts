@@ -52,6 +52,7 @@ const DeviceItem = (device: any) => Widget.Box({
 		Widget.Switch({
 			active: device.connected,
 			binds: [['visible', device, 'connecting', c => !c]],
+			//@ts-ignore WTF IS GOING ON HERE LOL?
 			connections: [['notify::active', ({ active }) => {
 				device.setConnection(active);
 			}]],

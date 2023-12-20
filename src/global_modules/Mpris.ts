@@ -14,7 +14,7 @@ import Gtk from "gi://Gtk";
 
 const MEDIA_CACHE_PATH = CACHE_DIR + '/media';
 
-export const BlurredCoverArt = (player: MprisPlayer, props: BoxProps<AgsBox>) => Box({
+export const BlurredCoverArt = (player: MprisPlayer, props: BoxProps) => Box({
 	...props,
 	class_name: 'blurred-cover',
 	connections: [[player, box => {
@@ -38,7 +38,7 @@ export const BlurredCoverArt = (player: MprisPlayer, props: BoxProps<AgsBox>) =>
 	}, 'notify::cover-path']],
 });
 
-export const CoverArt = (player: MprisPlayer, props?: BoxProps<AgsBox>) => Box({
+export const CoverArt = (player: MprisPlayer, props?: BoxProps) => Box({
 	...props,
 	class_name: 'cover',
 	binds: [['css', player, 'cover-path',
@@ -245,7 +245,7 @@ export const LengthLabel = (player: MprisPlayer) => Widget.Label({
 
 const Footer = (player: MprisPlayer) => Widget.CenterBox({
 	class_name: 'footer-box',
-	children: [
+	start_widget:
 		Widget.Box({
 			class_name: 'position',
 			children: [
@@ -254,6 +254,7 @@ const Footer = (player: MprisPlayer) => Widget.CenterBox({
 				LengthLabel(player),
 			],
 		}),
+	center_widget:
 		Widget.Box({
 			class_name: 'controls',
 			children: [
@@ -264,12 +265,12 @@ const Footer = (player: MprisPlayer) => Widget.CenterBox({
 				LoopButton(player),
 			],
 		}),
+	end_widget:
 		PlayerIcon(player, {
 			symbolic: false,
 			hexpand: true,
 			hpack: 'end',
 		}),
-	],
 });
 
 

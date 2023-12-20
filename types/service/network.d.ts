@@ -37,7 +37,7 @@ export declare class Network extends Service {
     private _client;
     wifi: Wifi;
     wired: Wired;
-    primary?: string;
+    primary: null | 'wifi' | 'wired';
     connectivity: string;
     constructor();
     toggleWifi(): void;

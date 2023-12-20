@@ -4,6 +4,7 @@ import PopupWindow from "../../global_modules/PopupWindow.js";
 import { Gtk } from "gi://Gtk";
 import { ToggleSwitches } from "./modules/ToggleSwitches.js";
 import Mpris from "../../global_modules/Mpris.js";
+import Header from "./modules/Header.js";
 
 export function Group(children: Gtk.Widget[]) {
   return Widget.Box({
@@ -18,10 +19,11 @@ export function ControlCenter() {
     name: "controlcenter",
     layout: "top right",
     anchor: ["top", "right"],
+    focusable: false,
     content: Widget.Box({
       vertical: true,
       class_names: ["controlcenter"],
-      children: [Group([Volume()]), ToggleSwitches([["network", "bluetooth"]]), Widget.Box({ child: Mpris(), class_names: ["mpris-wrapper"] })],
+      children: [Group([Header()]), Group([Volume()]), ToggleSwitches([["network", "bluetooth"]]), Widget.Box({ child: Mpris(), class_names: ["mpris-wrapper"] })],
     }),
   });
 }

@@ -67,7 +67,7 @@ export type ArrowToggleButtonProps = {
 	deactivate: Function,
 	connection: [string | number | GObject.Object, Function],
 	activateOnArrow?: true,
-} & BoxProps<AgsBox>;
+} & BoxProps;
 
 
 export const ArrowToggleButton = ({

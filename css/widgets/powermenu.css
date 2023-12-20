@@ -21,3 +21,6 @@
 	margin: 10px;
 	min-width: 150px;
 }
+.power image {
+	color: @base08;
+}

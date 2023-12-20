@@ -14,6 +14,10 @@ declare module 'resource:///com/github/Aylur/ags/app.js' {
     const exports: typeof import('./app')
     export = exports
 }
+declare module 'resource:///com/github/Aylur/ags/gobject.js' {
+    const exports: typeof import('./gobject')
+    export = exports
+}
 declare module 'resource:///com/github/Aylur/ags/service.js' {
     const exports: typeof import('./service')
     export = exports

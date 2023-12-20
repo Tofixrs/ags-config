@@ -4,6 +4,7 @@ export default {
 		logout: "system-log-out-symbolic",
 		sleep: "weather-clear-night-symbolic",
 		reboot: "system-reboot-symbolic",
+		lock: 'system-lock-screen-symbolic',
 	},
 	ui: {
 		arrowRight: "pan-end-symbolic",

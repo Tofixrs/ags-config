@@ -2,13 +2,14 @@
 
 .controlcenter {
   background-color: @base00;
-  min-height: 500px;
   min-width: 400px;
   border-radius: 15px;
   border-radius: 15px;
   margin: 10px;
   box-shadow: 0px 0px 5px 5px @base01;
   font-size: 12.5px;
+  padding-top: 5px;
+  padding-bottom: 10px;
 }
 
 .controlcenter .module {
@@ -107,4 +108,23 @@
 .controlcenter .toggle-button button {
   background-color: transparent;
   border-radius: 15px;
+}
+
+.controlcenter .header .avatar {
+  min-height: 70px;
+  min-width: 70px;
+  border-radius: 15px;
+}
+
+.controlcenter .header .mods {
+  margin: 0px 2px;
+  min-height: 7.5px;
+}
+.controlcenter .header-mod {
+  background-color: @base03;
+  padding: 5px 5px;
+  margin: 5px;
+  min-width: 20px;
+  min-height: 20px;
+  border-radius: 5px;
 }

@@ -1,10 +1,11 @@
 import Gtk from 'node_modules/@girs/gtk-3.0/gtk-3.0';
-import AgsBox, { type BoxProps } from './box.js';
-export interface CenterBoxProps extends BoxProps<AgsCenterBox> {
+import { type BaseProps } from './widget.js';
+import AgsBox from './box.js';
+export type CenterBoxProps = BaseProps<AgsCenterBox, Gtk.Box.ConstructorProperties & {
     start_widget?: Gtk.Widget;
     center_widget?: Gtk.Widget;
     end_widget?: Gtk.Widget;
-}
+}>;
 export default class AgsCenterBox extends AgsBox {
     constructor(props?: CenterBoxProps);
     set children(children: Gtk.Widget[]);

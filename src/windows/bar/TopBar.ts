@@ -1,8 +1,8 @@
 import { Widget } from "resource:///com/github/Aylur/ags/widget.js";
 import Workspaces from "./modules/workspaces.js";
 import Dashboard from "./modules/dashboard.js";
-import PowerButton from "./modules/powerButton.js";
 import { SysStatus } from "./modules/sysStatus.js";
+import PowerButton from "../../global_modules/power_button.js";
 
 export default (monitor: number) =>
 	Widget.Window({
@@ -39,5 +39,9 @@ const Center = () =>
 const End = () =>
 	Widget.Box({
 		class_names: ["end"],
-		children: [Widget.Box({ hexpand: true }), SysStatus(["volume", "network", "battery"]), SeperatorDot(), PowerButton()],
+		children: [
+			Widget.Box({ hexpand: true }),
+			SysStatus(["volume", "network", "battery"]),
+			SeperatorDot(),
+			PowerButton({ class_names: ["module"] })],
 	});

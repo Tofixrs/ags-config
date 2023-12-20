@@ -55,10 +55,9 @@ const Battery = () => Widget.Label({
 
 const NetworkIndicator = () => Widget.Icon({
 	connections: [[Network, self => {
-		const icon = Network[Network.primary!]?.iconName;
+		const icon = Network[Network.primary!].icon_name;
 		self.icon = icon || '';
-		self.visible = icon;
+		self.visible = icon ? true : false;
 	}]],
 });
-
 

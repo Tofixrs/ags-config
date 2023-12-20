@@ -9,10 +9,7 @@ export declare function readFileAsync(file: string | Gio.File): Promise<string>;
 export declare function writeFile(string: string, path: string): Promise<Gio.File>;
 export declare function monitorFile(path: string, callback?: (file: Gio.File, event: Gio.FileMonitorEvent) => void, type?: 'file' | 'directory', flags?: Gio.FileMonitorFlags): Gio.FileMonitor | null;
 export declare function loadInterfaceXML(iface: string): string | null;
-export declare function bulkConnect(service: GObject.Object, list: [
-    event: string,
-    callback: (...args: any[]) => void
-][]): number[];
+export declare function bulkConnect(service: GObject.Object, list: Array<[event: string, callback: (...args: any[]) => void]>): number[];
 export declare function bulkDisconnect(service: GObject.Object, ids: number[]): void;
 export declare function interval(interval: number, callback: () => void, bind?: Gtk.Widget): number;
 export declare function timeout(ms: number, callback: () => void): number;

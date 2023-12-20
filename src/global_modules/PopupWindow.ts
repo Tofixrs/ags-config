@@ -30,31 +30,25 @@ const layouts = {
 	'center': (windowName: string, child: AgsBox, expand: boolean) => Widget.CenterBox({
 		class_name: 'shader',
 		css: expand ? 'min-width: 5000px; min-height: 3000px;' : '',
-		children: [
-			Padding(windowName),
-			Widget.CenterBox({
-				vertical: true,
-				children: [
-					Padding(windowName),
-					child,
-					Padding(windowName),
-				],
-			}),
-			Padding(windowName),
-		],
+		start_widget: Padding(windowName),
+		center_widget: Widget.CenterBox({
+			orientation: Gtk.Orientation.VERTICAL,
+			start_widget: Padding(windowName),
+			center_widget: child,
+			end_widget: Padding(windowName),
+		}),
 	}),
 	'top': (windowName: string, child: AgsBox) => Widget.CenterBox({
-		children: [
-			Padding(windowName),
-			Widget.Box({
-				vertical: true,
-				children: [
-					PopupRevealer(windowName, Gtk.RevealerTransitionType.SLIDE_DOWN, child),
-					Padding(windowName),
-				],
-			}),
-			Padding(windowName),
-		],
+		orientation: Gtk.Orientation.VERTICAL,
+		start_widget: Padding(windowName),
+		center_widget: Widget.Box({
+			vertical: true,
+			children: [
+				PopupRevealer(windowName, Gtk.RevealerTransitionType.SLIDE_DOWN, child),
+				Padding(windowName),
+			],
+		}),
+		end_widget: Padding(windowName),
 	}),
 	'top right': (windowName: string, child: AgsBox) => Widget.Box({
 		children: [
