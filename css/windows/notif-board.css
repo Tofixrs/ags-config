@@ -1,0 +1,18 @@
+window#notif-board {
+	background-color: transparent;
+}
+
+.notif-board-wrapper {
+	padding: 10px;
+	background-color: transparent;
+}
+
+.notif-board {
+	min-height: 600px;
+	min-width: 450px;
+	border-radius: 5px;
+
+	background-color: @base00;
+	box-shadow: 0px 0px 5px 0px rgba(66, 68, 90, 1);
+	padding: 10px;
+}

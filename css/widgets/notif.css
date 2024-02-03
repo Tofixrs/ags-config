@@ -1,0 +1,30 @@
+.notification {
+	background-color: @base01;
+	min-height: 100px;
+	border-radius: 15px;
+	padding: 7.5px;
+}
+
+.notification .notif-titleRow {
+	padding: 7.5px 0;
+	font-size: 16.5px;
+}
+
+.notification .notif-titleRow .notif-icon {
+	padding-right: 10px;
+}
+
+.notification .notif-titleRow button {
+	background-color: transparent;
+	border-radius: 50%;
+}
+
+.notification .notif-body {
+	padding-bottom: 10px;
+}
+
+.notification .notif-actions button {
+	margin: 0px 5px;
+	padding-right: 15px;
+	padding-left: 15px;
+}

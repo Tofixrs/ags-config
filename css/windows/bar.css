@@ -1,0 +1,55 @@
+.bar {
+	background-color: transparent;
+	margin: 5px 0px;
+}
+
+.bar-panel {
+	font-size: 10px;
+	background-color: transparent;
+}
+
+.bar-start,
+.bar-center {
+	background-color: transparent;
+}
+
+.bar-module {
+	background-color: @base00;
+	padding: 5px 10px;
+	border-radius: 10px;
+}
+
+.ws-btn {
+	all: unset;
+	border-radius: 50%;
+	min-height: 5px;
+	min-width: 5px;
+	margin: 0px 5px;
+	background-color: @base04;
+	transition: 200ms;
+}
+
+.ws-btn.occupied {
+	min-width: 7.5px;
+	background-color: @base0D;
+	border-radius: 5px;
+}
+
+.ws-btn.active,
+.ws-btn:hover {
+	background-color: @base0E;
+	border-radius: 5px;
+	min-width: 10px;
+}
+
+.bar-sep-dot {
+	min-height: 5px;
+	min-width: 5px;
+	border-radius: 50%;
+	margin: 5px;
+}
+
+.bar-module.dashboard-btn {
+	padding: 0 5px;
+	font-size: 15px;
+}

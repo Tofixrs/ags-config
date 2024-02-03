@@ -1,0 +1,8 @@
+@import url("./theme.css");
+@import url("./widgets/main.css");
+@import url("./windows/main.css");
+
+window {
+	padding: 0;
+	margin: 0;
+}
