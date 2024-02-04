@@ -6,7 +6,7 @@ export default (monitor: number) =>
 		name: `desktop-clock${monitor}`,
 		monitor,
 		class_names: ["desktop-clock"],
-		layer: "background",
+		layer: "bottom",
 		child: Widget.Box({
 			vertical: true,
 			children: [clock("%H:%M:%S", 900), clock("%e %B %A")],
