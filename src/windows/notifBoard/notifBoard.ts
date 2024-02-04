@@ -1,12 +1,12 @@
 import Notifications from "resource:///com/github/Aylur/ags/service/notifications.js";
 import notification from "../../globalWidgets/notification.js";
+import PopupWindow from "../../globalWidgets/PopupWindow.js";
 
 export default () =>
-	Widget.Window({
+	PopupWindow({
 		name: "notif-board",
 		anchor: ["bottom"],
-		visible: false,
-		layer: "overlay",
+		transition: "slide_up",
 		child: Widget.Box({
 			class_name: "notif-board-wrapper",
 			vertical: true,

@@ -1,13 +1,13 @@
 import Notifications from "resource:///com/github/Aylur/ags/service/notifications.js";
 import notification from "../../globalWidgets/notification.js";
 
-const showingNotifs = Variable<number[]>([]);
+export const showingNotifs = Variable<number[]>([]);
 
 Notifications.connect("notified", (_, id) => {
 	const clone = showingNotifs.value.map((x) => x);
+
 	clone.push(id);
 	showingNotifs.value = clone;
-	console.log(showingNotifs.value);
 });
 
 export default (monitor: number) =>
@@ -59,10 +59,7 @@ const Notifs = () =>
 							if (timeout == undefined) return;
 
 							if (timeout == 0) {
-								const clone = showingNotifs.value.map((x) => x);
-
-								const i = clone.indexOf(id);
-								clone.splice(i, 1);
+								const clone = showingNotifs.value.filter((x) => x != id);
 
 								showingNotifs.value = clone;
 								self.destroy();

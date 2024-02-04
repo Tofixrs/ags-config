@@ -3,6 +3,7 @@ import Workspaces from "./modules/Workspaces.js";
 import Time from "./modules/Time.js";
 import DashboardBtn from "./modules/DashboardBtn.js";
 import NotifBtn from "./modules/NotifBtn.js";
+import SysStatus from "./modules/SysStatus.js";
 
 export default (monitor: number) =>
 	Widget.Window({
@@ -16,6 +17,7 @@ export default (monitor: number) =>
 			class_name: "bar-panel",
 			start_widget: Start(),
 			center_widget: Center(),
+			end_widget: End(),
 		}),
 	});
 
@@ -34,6 +36,11 @@ const Center = () =>
 			SeperatorDot(),
 			DashboardBtn(),
 		],
+	});
+const End = () =>
+	Widget.Box({
+		class_name: "bar-end",
+		children: [Widget.Box({ hexpand: true }), SysStatus()],
 	});
 
 export const SeperatorDot = () =>

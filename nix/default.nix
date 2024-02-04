@@ -10,12 +10,13 @@ stdenv.mkDerivation {
     runHook postBuild
   '';
   installPhase = ''
-    runHook preInstall
+      runHook preInstall
 
-    cp config.js $out/
-    cp -r src $out/
-    cp -r css $out/
+    mkdir $out
+      cp config.js $out/
+      cp -r src $out/
+      cp -r css $out/
 
-    runHook postInstall
+      runHook postInstall
   '';
 }

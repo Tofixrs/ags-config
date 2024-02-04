@@ -1,6 +1,7 @@
 import Gtk30 from "gi://Gtk?version=3.0";
 import { Notification } from "resource:///com/github/Aylur/ags/service/notifications.js";
 import { lookUpIcon } from "resource:///com/github/Aylur/ags/utils.js";
+import { showingNotifs } from "../windows/notifDisplay/notifDisplay.js";
 
 export default (notif: Notification) =>
 	Widget.Box({
@@ -42,7 +43,12 @@ const TitleRow = (notif: Notification) =>
 			Widget.Box({ hexpand: true }),
 			Widget.Button({
 				child: Widget.Icon("window-close-symbolic"),
-				on_clicked: () => notif.close(),
+				on_clicked: () => {
+					const clone = showingNotifs.value.filter((x) => x != notif.id);
+
+					showingNotifs.value = clone;
+					notif.close();
+				},
 			}),
 		],
 	});

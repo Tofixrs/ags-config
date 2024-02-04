@@ -53,3 +53,17 @@
 	padding: 0 5px;
 	font-size: 15px;
 }
+
+.bar-module.sys-status .sys-module.volume {
+	min-width: 20px;
+	min-height: 20px;
+	font-size: 2px;
+}
+
+.bar-module.sys-status .sys-module.volume .vol-icon {
+	font-size: 14px;
+}
+.bar-module.sys-status .sys-module {
+	font-size: 12px;
+	margin: 0px 7.5px;
+}

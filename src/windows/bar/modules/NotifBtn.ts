@@ -12,5 +12,8 @@ export default () =>
 		vpack: "center",
 		hpack: "center",
 		class_names: ["bar-module", "dashboard-btn"],
-		on_clicked: () => App.toggleWindow("notif-board"),
+		on_clicked: () => {
+			App.toggleWindow("notif-board");
+			App.closeWindow("dashboard");
+		},
 	});

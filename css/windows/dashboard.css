@@ -1,0 +1,131 @@
+window#dashboard {
+	background-color: transparent;
+}
+
+.dashboard {
+	background-color: @base00;
+	border-radius: 15px;
+	margin: 10px;
+	min-width: 600px;
+	box-shadow: 0px 0px 5px 5px @base01;
+	font-size: 12.5px;
+	padding-top: 5px;
+	padding-bottom: 10px;
+}
+
+.dashboard .module {
+	all: unset;
+}
+
+.dashboard .group {
+	border-radius: 15px;
+	min-width: unset;
+	background-color: @base02;
+	padding: 7px;
+	margin: 5px 10px 0px;
+}
+
+.mpris-wrapper {
+	margin: 5px 10px 0px;
+}
+
+.dashboard .menu {
+	border-radius: 15px;
+	margin-top: 10px;
+	padding: 5px 5px;
+	background-color: @base03;
+}
+
+.dashboard .menu separator {
+	min-height: 2px;
+	min-width: 2px;
+	border-radius: 15px;
+	margin: 1px 5px;
+}
+
+.dashboard .vol-indicator {
+	background-color: transparent;
+}
+
+.dashboard .vol-slider {
+	margin: 0px 10px;
+}
+
+.dashboard .arrow {
+	background-color: transparent;
+}
+
+.dashboard scale {
+	border-radius: 15px;
+}
+
+/*Behind scale*/
+.dashboard scale trough {
+	border-radius: 15px;
+	background-color: @base04;
+}
+
+/*slider itself*/
+.dashboard scale trough highlight,
+.dashboard scale trough fill {
+	min-height: 0.45em;
+	border-radius: 15px;
+}
+
+.dashboard scale slider {
+	box-shadow: 0 0 0 2px @base0E;
+}
+
+.dashboard scale highlight {
+	background-color: @base0E;
+	background-image: unset;
+}
+
+.dashboard .menu-list-item {
+	margin: 2.5px 10px;
+	background-color: @base02;
+	padding: 10px 15px 10px 10px;
+	border-radius: 15px;
+}
+
+.vertical-sep {
+	min-height: 20px;
+	min-width: 20px;
+	border-radius: 50%;
+}
+
+.dashboard .toggle-button {
+	border-radius: 15px;
+	background-color: @base03;
+}
+.dashboard .toggle-button.active {
+	background-color: @base0E;
+	color: black;
+}
+
+.dashboard .toggle-button.active * {
+	color: black;
+}
+.dashboard .toggle-button button {
+	background-color: transparent;
+	border-radius: 15px;
+}
+
+.dashboard .header .avatar {
+	min-height: 70px;
+	min-width: 70px;
+	border-radius: 15px;
+}
+
+.dashboard .header .mods {
+	margin: 0px 2px;
+	min-height: 7.5px;
+}
+.dashboard .header-mod {
+	background-color: @base03;
+	padding: 5px 5px;
+	margin: 5px;
+	min-width: 20px;
+	min-height: 20px;
+	border-radius: 5px;
+}

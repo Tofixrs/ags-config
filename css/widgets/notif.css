@@ -3,6 +3,16 @@
 	min-height: 100px;
 	border-radius: 15px;
 	padding: 7.5px;
+	border: 2px solid @base0E;
+}
+
+.notification.critical {
+	color: @base08;
+}
+
+.notification.low {
+	opacity: 0.75;
+	border: none;
 }
 
 .notification .notif-titleRow {

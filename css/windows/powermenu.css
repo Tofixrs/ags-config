@@ -1,0 +1,36 @@
+window#powermenu,
+window#verification {
+	background-color: transparent;
+}
+
+.powermenu-wrapper,
+.verification-wrapper {
+	padding: 20px;
+}
+
+.powermenu,
+.verification {
+	background-color: @base00;
+	padding: 20px;
+	border-radius: 15px;
+	box-shadow: 0px 0px 10px 10px @base01;
+}
+.powermenu button {
+	font-size: 100px;
+	margin-left: 10px;
+	margin-right: 10px;
+	background-color: @base02;
+}
+.powermenu .row {
+	margin: 10px 0px;
+}
+.verification {
+	font-size: 50px;
+}
+.verification button {
+	margin: 10px;
+	min-width: 150px;
+}
+.power image {
+	color: @base08;
+}

@@ -1,0 +1,50 @@
+.mpris {
+	min-height: 50px;
+	border-radius: 15px;
+	text-shadow: 1px 1px 2px black;
+}
+.player {
+	min-height: 100px;
+}
+.blurred-cover {
+	padding: 15px;
+}
+
+.blurred-cover,
+.cover {
+	background-size: cover;
+	background-position: center;
+	border-radius: 15px;
+}
+
+.cover {
+	min-height: 100px;
+	min-width: 100px;
+	box-shadow: 2px 2px 2px 0 black;
+	opacity: 0.9;
+}
+.title-artist {
+	padding: 10px;
+	font-weight: bold;
+}
+
+.position-slider {
+	padding: 10px 0px;
+}
+
+.player-button {
+	background: transparent;
+	font-size: 20px;
+	min-width: 10px;
+}
+.player-button:hover {
+	background: transparent;
+}
+
+.player-button label {
+	min-width: 10px;
+	padding-right: 5px;
+}
+.player-icon {
+	font-size: 20px;
+}
