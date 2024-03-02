@@ -1,4 +1,4 @@
-import { Widget } from "resource:///com/github/Aylur/ags/widget.js";
+import Widget from "resource:///com/github/Aylur/ags/widget.js";
 import { ArrowToggleButton, Menu } from "../SubMenu.js";
 import NetworkService from "resource:///com/github/Aylur/ags/service/network.js";
 import icons from "../../../icons.js";

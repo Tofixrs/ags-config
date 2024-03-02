@@ -1,4 +1,4 @@
-import { Widget } from "resource:///com/github/Aylur/ags/widget.js";
+import Widget from "resource:///com/github/Aylur/ags/widget.js";
 import icons from "../icons.js";
 import Audio from "resource:///com/github/Aylur/ags/service/audio.js";
 import { getVolumeIcon } from "../utils.js";

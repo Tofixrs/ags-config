@@ -1,4 +1,4 @@
-import { Widget } from "resource:///com/github/Aylur/ags/widget.js";
+import Widget from "resource:///com/github/Aylur/ags/widget.js";
 import PopupWindow from "../../globalWidgets/PopupWindow.js";
 import Gtk from "gi://Gtk?version=3.0";
 import WifiPassword from "../../services/WifiPassword.js";

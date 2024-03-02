@@ -1,4 +1,4 @@
-import { Widget } from "resource:///com/github/Aylur/ags/widget.js";
+import Widget from "resource:///com/github/Aylur/ags/widget.js";
 import Workspaces from "./modules/Workspaces.js";
 import Time from "./modules/Time.js";
 import DashboardBtn from "./modules/DashboardBtn.js";

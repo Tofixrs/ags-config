@@ -1,5 +1,5 @@
 import Variable from "resource:///com/github/Aylur/ags/variable.js";
-import { Widget } from "resource:///com/github/Aylur/ags/widget.js";
+import Widget from "resource:///com/github/Aylur/ags/widget.js";
 import icons from "../../icons.js";
 import { timeout } from "resource:///com/github/Aylur/ags/utils.js";
 import { BoxProps } from "types/widgets/box.js";

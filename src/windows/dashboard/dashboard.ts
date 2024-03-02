@@ -1,4 +1,4 @@
-import { Widget } from "resource:///com/github/Aylur/ags/widget.js";
+import Widget from "resource:///com/github/Aylur/ags/widget.js";
 import { Volume } from "./modules/volume.js";
 import Gtk from "gi://Gtk?version=3.0";
 import { ToggleSwitches } from "./modules/ToggleSwitches.js";

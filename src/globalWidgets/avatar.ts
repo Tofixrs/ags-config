@@ -1,5 +1,5 @@
 import GLib from "gi://GLib";
-import { Widget } from "resource:///com/github/Aylur/ags/widget.js";
+import Widget from "resource:///com/github/Aylur/ags/widget.js";
 import { BoxProps } from "types/widgets/box";
 import App from "resource:///com/github/Aylur/ags/app.js";
 

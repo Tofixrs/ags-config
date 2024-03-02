@@ -1,4 +1,4 @@
-import { Box, Widget } from "resource:///com/github/Aylur/ags/widget.js";
+import Widget from "resource:///com/github/Aylur/ags/widget.js";
 import Avatar from "../../../globalWidgets/avatar.js";
 import PowerButton from "../../../globalWidgets/power_button.js";
 import { uptime } from "../../../variables.js";
@@ -6,7 +6,7 @@ import icons from "../../../icons.js";
 import { execAsync } from "resource:///com/github/Aylur/ags/utils.js";
 
 export default () =>
-	Box({
+	Widget.Box({
 		class_names: ["header"],
 		children: [
 			Avatar(),

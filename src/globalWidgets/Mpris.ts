@@ -1,16 +1,12 @@
 import Mpris from "resource:///com/github/Aylur/ags/service/mpris.js";
-import {
-	Box,
-	Button,
-	Widget,
-} from "resource:///com/github/Aylur/ags/widget.js";
+import Widget from "resource:///com/github/Aylur/ags/widget.js";
 import { MprisPlayer } from "types/service/mpris";
 import { BoxProps } from "types/widgets/box";
-import type { Props as LabelProps } from "types/widgets/label";
+import type { LabelProps } from "types/widgets/label";
 import { SliderProps } from "types/widgets/slider";
 import icons from "../icons.js";
 import { StackProps } from "types/widgets/stack.js";
-import { Props as IconProps } from "types/widgets/icon.js";
+import { IconProps } from "types/widgets/icon.js";
 import { Variable } from "resource:///com/github/Aylur/ags/variable.js";
 import { blurImg } from "../utils.js";
 
@@ -274,10 +270,10 @@ const Footer = (player: MprisPlayer) =>
 	});
 
 const TrackInfo = (player: MprisPlayer) =>
-	Box({
+	Widget.Box({
 		children: [
 			CoverArt(player),
-			Box({
+			Widget.Box({
 				class_names: ["title-artist"],
 				vertical: true,
 				children: [TitleLabel(player), ArtistLabel(player)],
@@ -318,7 +314,7 @@ const playerW = (player: MprisPlayer, playerIndex: number) =>
 	BlurredCoverArt(player, {
 		class_names: ["player", player.name],
 		children: [
-			Button({
+			Widget.Button({
 				label: "-",
 				vpack: "center",
 				hpack: "center",
@@ -329,11 +325,11 @@ const playerW = (player: MprisPlayer, playerIndex: number) =>
 				Mpris,
 				(self) => (self.visible = Mpris.players[playerIndex - 1] != undefined),
 			),
-			Box({
+			Widget.Box({
 				vertical: true,
 				children: [TrackInfo(player), PositionSlider(player), Footer(player)],
 			}),
-			Button({
+			Widget.Button({
 				label: "+",
 				vpack: "center",
 				hpack: "center",

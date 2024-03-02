@@ -1,4 +1,4 @@
-import { Widget } from "resource:///com/github/Aylur/ags/widget.js";
+import Widget from "resource:///com/github/Aylur/ags/widget.js";
 import { PowerAction, PowerMenuService } from "../services/PowerMenu.js";
 import icons from "../icons.js";
 import App from "resource:///com/github/Aylur/ags/app.js";
