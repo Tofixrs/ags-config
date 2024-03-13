@@ -1,0 +1,14 @@
+window#calendar {
+	background-color: transparent;
+}
+
+.calendar-wrapper {
+	padding: 10px;
+}
+
+.calendar {
+	background-color: @base00;
+	padding: 20px;
+	box-shadow: 0px 0px 5px 0px @base01;
+	border-radius: 0.5em;
+}

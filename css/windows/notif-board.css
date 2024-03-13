@@ -13,6 +13,6 @@ window#notif-board {
 	border-radius: 5px;
 
 	background-color: @base00;
-	box-shadow: 0px 0px 5px 0px rgba(66, 68, 90, 1);
+	box-shadow: 0px 0px 5px 0px @base01;
 	padding: 10px;
 }

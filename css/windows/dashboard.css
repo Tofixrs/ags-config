@@ -7,6 +7,7 @@ window#dashboard {
 	border-radius: 15px;
 	margin: 10px;
 	min-width: 600px;
+	min-height: 600px;
 	box-shadow: 0px 0px 5px 5px @base01;
 	font-size: 12.5px;
 	padding-top: 5px;

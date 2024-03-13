@@ -19,7 +19,6 @@ export default () =>
 		name: "dashboard",
 		anchor: ["bottom"],
 		transition: "slide_up",
-		heightRequest: 600,
 		child: Widget.Box({
 			vertical: true,
 			class_names: ["dashboard"],

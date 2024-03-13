@@ -6,6 +6,7 @@ import desktopClock from "./windows/desktopClock.js";
 import dashboard from "./windows/dashboard/dashboard.js";
 import { PasswordInput } from "./windows/dashboard/WifiPassword.js";
 import { PowerMenu, Verification } from "./windows/PowerMenu.js";
+import Calendar from "./windows/calendar.js";
 
 const monitors = JSON.parse(exec("hyprctl -j monitors"));
 const forMonitors = (widget) => monitors.map((mon) => widget(mon.id));
@@ -22,5 +23,6 @@ App.config({
 		PasswordInput(),
 		PowerMenu(),
 		Verification(),
+		Calendar(),
 	].flat(2),
 });
