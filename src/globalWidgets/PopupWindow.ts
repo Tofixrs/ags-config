@@ -9,7 +9,6 @@ import Box from "types/widgets/box";
 
 const keyGrabber = Widget.Window({
 	name: "key-grabber",
-	popup: true,
 	anchor: ["top", "left", "right", "bottom"],
 	css: "background-color: transparent;",
 	visible: false,
@@ -47,7 +46,6 @@ export class PopupWindow extends AgsWindow<Gtk.Widget, object> {
 	}: PopupWindowProps) {
 		super({
 			name,
-			popup: true,
 			keymode: "exclusive",
 			layer: "overlay",
 			class_names: ["popup-window", name],
@@ -76,6 +74,8 @@ export class PopupWindow extends AgsWindow<Gtk.Widget, object> {
 		//@ts-expect-error sus
 		keyGrabber.bind("visible", this, "visible");
 		keyGrabber.attribute?.list.push(name as string);
+
+		this.keybind("Escape", () => App.closeWindow(name));
 	}
 
 	set transition(dir) {
@@ -85,13 +85,6 @@ export class PopupWindow extends AgsWindow<Gtk.Widget, object> {
 		return this.revealer.transition;
 	}
 }
-
-/** @param {import('types/widgets/window').WindowProps & {
- *      name: string
- *      child: import('types/widgets/box').default
- *      transition?: import('types/widgets/revealer').RevealerProps['transition']
- *  }} config
- */
 
 type PopupWindowProps = WindowProps<
 	Gtk.Widget,

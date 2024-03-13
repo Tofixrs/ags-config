@@ -1,7 +1,6 @@
 import Notifications from "resource:///com/github/Aylur/ags/service/notifications.js";
 import notification from "../../globalWidgets/notification.js";
 import PopupWindow from "../../globalWidgets/PopupWindow.js";
-import { showingNotifs } from "../notifDisplay/notifDisplay.js";
 
 export default () =>
 	PopupWindow({
@@ -23,7 +22,6 @@ export default () =>
 								label: "Clear all",
 								on_clicked: () => {
 									Notifications.clear();
-									showingNotifs.setValue([]);
 								},
 							}),
 						],

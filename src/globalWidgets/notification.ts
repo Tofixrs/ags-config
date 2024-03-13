@@ -1,24 +1,28 @@
 import Gtk30 from "gi://Gtk?version=3.0";
 import { Notification } from "resource:///com/github/Aylur/ags/service/notifications.js";
 import { lookUpIcon } from "resource:///com/github/Aylur/ags/utils.js";
-import { showingNotifs } from "../windows/notifDisplay/notifDisplay.js";
 
 export default (notif: Notification) =>
-	Widget.Box({
-		class_names: ["notification", notif.urgency],
-		vertical: true,
-		children: [TitleRow(notif), Body(notif), Actions(notif)],
-	});
+	Widget.EventBox(
+		{
+			attribute: { id: notif.id },
+			on_primary_click: notif.dismiss,
+		},
+		Widget.Box({
+			class_names: ["notification", notif.urgency],
+			vertical: true,
+			children: [TitleRow(notif), Body(notif), Actions(notif)],
+		}),
+	);
 
 const NotificationIcon = ({ app_entry, app_icon, image }: Notification) => {
 	if (image) {
 		return Widget.Box({
-			css: `
-                background-image: url("${image}");
-                background-size: contain;
-                background-repeat: no-repeat;
-                background-position: center;
-            `,
+			css:
+				`background-image: url("${image}");` +
+				"background-size: contain;" +
+				"background-repeat: no-repeat;" +
+				"background-position: center;",
 		});
 	}
 
@@ -44,9 +48,6 @@ const TitleRow = (notif: Notification) =>
 			Widget.Button({
 				child: Widget.Icon("window-close-symbolic"),
 				on_clicked: () => {
-					const clone = showingNotifs.value.filter((x) => x != notif.id);
-
-					showingNotifs.value = clone;
 					notif.close();
 				},
 			}),
@@ -57,9 +58,10 @@ const Body = (notif: Notification) =>
 	Widget.Label({
 		class_name: "notif-body",
 		hexpand: true,
-		label: notif.body,
+		use_markup: true,
 		xalign: 0,
 		justification: "left",
+		label: notif.body,
 		wrap: true,
 	});
 
@@ -70,7 +72,10 @@ const Actions = (notif: Notification) =>
 		children: notif.actions.map(({ id, label }) =>
 			Widget.Button({
 				class_name: "notif-action-button",
-				on_clicked: () => notif.invoke(id),
+				on_clicked: () => {
+					notif.invoke(id);
+					notif.dismiss();
+				},
 				child: Widget.Label(label),
 			}),
 		),
