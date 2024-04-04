@@ -4,6 +4,8 @@ import Time from "./modules/Time.js";
 import DashboardBtn from "./modules/DashboardBtn.js";
 import NotifBtn from "./modules/NotifBtn.js";
 import SysStatus from "./modules/SysStatus.js";
+import { SysTray } from "./modules/Tray.js";
+import SystemTray from "resource:///com/github/Aylur/ags/service/systemtray.js";
 
 export default (monitor: number) =>
 	Widget.Window({
@@ -40,7 +42,15 @@ const Center = () =>
 const End = () =>
 	Widget.Box({
 		class_name: "bar-end",
-		children: [Widget.Box({ hexpand: true }), SysStatus()],
+		children: [
+			Widget.Box({ hexpand: true }),
+			SysTray(),
+			SeperatorDot().hook(
+				SystemTray,
+				(self) => (self.visible = SystemTray.items.length > 0),
+			),
+			SysStatus(),
+		],
 	});
 
 export const SeperatorDot = () =>

@@ -67,3 +67,12 @@
 	font-size: 12px;
 	margin: 0px 7.5px;
 }
+
+.bar-module.sys-tray button {
+	background-color: transparent;
+	padding: 0;
+}
+
+.bar-module.sys-tray button:hover {
+	box-shadow: none;
+}
