@@ -61,7 +61,8 @@ const Body = (notif: Notification) =>
 		use_markup: true,
 		xalign: 0,
 		justification: "left",
-		label: notif.body,
+		label: notif.body.trim(),
+		max_width_chars: 50,
 		wrap: true,
 	});
 
