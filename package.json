@@ -9,7 +9,7 @@
 		"url": "git+https://github.com/Tofixrs/ags-config"
 	},
 	"scripts": {
-		"start": "ags -c \"$(pwd)/config.js\"",
+		"start": "ags -c \"$(pwd)/config.js\" --bus-name test",
 		"update-types": "rm -rf ./types && cp -r ~/.local/share/com.github.Aylur.ags/types ./types"
 	},
 	"devDependencies": {

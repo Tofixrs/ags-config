@@ -25,4 +25,9 @@ App.config({
 		Verification(),
 		Calendar(),
 	].flat(2),
+	closeWindowDelay: {
+		dashboard: 200,
+		"notif-board": 200,
+		calendar: 200,
+	},
 });
