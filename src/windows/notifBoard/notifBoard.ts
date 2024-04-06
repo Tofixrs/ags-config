@@ -55,6 +55,7 @@ export default () =>
 const Notifs = () =>
 	Widget.Scrollable({
 		vexpand: true,
+		hscroll: "never",
 		child: Widget.Box({ vertical: true }).hook(Notifications, (self) => {
 			if (Notifications.notifications.length == 0)
 				App.closeWindow("notif-board");
