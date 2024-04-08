@@ -1,7 +1,7 @@
 import Widget from "resource:///com/github/Aylur/ags/widget.js";
 import icons from "../icons.js";
 import Audio from "resource:///com/github/Aylur/ags/service/audio.js";
-import { getVolumeIcon } from "../utils.js";
+import { utils } from "../lib/index.js";
 
 export function VolumeIndicator() {
 	return Widget.Button({
@@ -17,7 +17,7 @@ export function VolumeIndicator() {
 				if (Audio.speaker.is_muted)
 					return (self.icon = icons.audio.volume.muted);
 
-				self.icon = getVolumeIcon(Audio.speaker.volume * 100);
+				self.icon = utils.getVolumeIcon(Audio.speaker.volume * 100);
 			},
 			"speaker-changed",
 		),

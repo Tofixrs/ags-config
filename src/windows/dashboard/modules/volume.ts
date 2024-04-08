@@ -7,8 +7,8 @@ import { VolumeIndicator } from "../../../globalWidgets/volume.js";
 import { fontIcon } from "../../../globalWidgets/icons.js";
 import icons from "../../../icons.js";
 import Gtk from "gi://Gtk?version=3.0";
-import { getAudioTypeIcon } from "../../../utils.js";
 import { lookUpIcon } from "resource:///com/github/Aylur/ags/utils.js";
+import {utils} from "../../../lib/index.js"
 
 const apps = new Variable(0);
 
@@ -75,7 +75,7 @@ const SinkItem = (stream: Stream) =>
 		child: Widget.Box({
 			children: [
 				Widget.Icon({
-					icon: getAudioTypeIcon(stream.icon_name || ""),
+					icon: utils.getAudioTypeIcon(stream.icon_name || ""),
 					tooltip_text: stream.icon_name,
 				}),
 				Widget.Label(

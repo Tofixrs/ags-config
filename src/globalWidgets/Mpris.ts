@@ -8,7 +8,7 @@ import icons from "../icons.js";
 import { StackProps } from "types/widgets/stack.js";
 import { IconProps } from "types/widgets/icon.js";
 import { Variable } from "resource:///com/github/Aylur/ags/variable.js";
-import { blurImg } from "../utils.js";
+import { utils } from "../lib/index.js";
 
 export const BlurredCoverArt = (player: MprisPlayer, props?: BoxProps) =>
 	Widget.Box({
@@ -18,7 +18,7 @@ export const BlurredCoverArt = (player: MprisPlayer, props?: BoxProps) =>
 			self.hook(
 				player,
 				(box) =>
-					blurImg(player.cover_path).then((img) => {
+					utils.blurImg(player.cover_path).then((img) => {
 						img && box.setCss(`background-image: url("${img}")`);
 					}),
 				"notify::cover-path",

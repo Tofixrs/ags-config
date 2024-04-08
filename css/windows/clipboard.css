@@ -1,0 +1,22 @@
+.clipboard {
+	font-size: 12.5px;
+	padding: 5px;
+}
+
+.clipboard .entry > box {
+	margin: 5px;
+	padding: 5px;
+	border-radius: 0.5em;
+	background-color: @base01;
+	box-shadow: 0px 0px 5px 0px @base01;
+}
+
+.clipboard .entry:hover > box {
+	background-color: @base02;
+}
+
+.trash_button {
+	border-radius: 50%;
+	background-color: transparent;
+	font-size: 10px;
+}

@@ -1,4 +1,4 @@
-import icons from "./icons.js";
+import icons from "../icons.js";
 import GLib from "gi://GLib?version=2.0";
 
 export function range(length: number, start: number = 0): number[] {
@@ -19,11 +19,9 @@ export function getVolumeIcon(volume: number) {
 	return find ? find.icon : medium;
 }
 
-//@es-lint-ignore
 export function getBatteryIcon(batteryPercent: number, charging: boolean) {
 	const floorTen = Math.floor(batteryPercent / 10) * 10; // 45 -> 40 29 -> 20 34 -> 30
 
-	/* eslint-disable */
 	if (!charging) {
 		switch (floorTen) {
 			case 0:
@@ -107,5 +105,12 @@ export function blurImg(img: string) {
 		Utils.execAsync(["convert", img, "-blur", "0x22", blurred])
 			.then(() => resolve(blurred))
 			.catch(() => resolve(""));
+	});
+}
+
+export async function sh(cmd: string | string[]) {
+	return Utils.execAsync(cmd).catch((err) => {
+		console.error(typeof cmd === "string" ? cmd : cmd.join(" "), err);
+		return "";
 	});
 }
