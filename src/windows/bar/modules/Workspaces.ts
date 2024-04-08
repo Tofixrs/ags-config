@@ -13,8 +13,8 @@ export default (ws: number = 5) =>
 	}).hook(Hyprland, (self) => {
 		self.children.map((btn) => {
 			btn.visible =
-				//@ts-expect-error :22
-				Hyprland.workspaces.some((ws) => ws.id === btn.id) || btn.id <= ws;
+				Hyprland.workspaces.some((ws) => ws.id === btn.attribute.id) ||
+				btn.attribute.id <= ws;
 		});
 	});
 
