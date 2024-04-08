@@ -8,7 +8,7 @@ export class HistEntry {
 	}
 
 	removeEntry() {
-		Utils.execAsync(`echo ${this.id} | cliphist delete ${this.text}`);
+		Utils.execAsync(`bash -c "echo ${this.id} | cliphist delete ${this.text}"`);
 	}
 
 	copy() {
