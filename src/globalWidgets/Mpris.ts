@@ -38,6 +38,8 @@ export const TitleLabel = (player: MprisPlayer, props?: LabelProps) =>
 	Widget.Label({
 		...props,
 		class_name: "title",
+		wrap: true,
+		max_width_chars: 50,
 		label: player.bind("track_title"),
 	});
 
