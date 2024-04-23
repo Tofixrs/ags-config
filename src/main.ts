@@ -8,8 +8,9 @@ import { PasswordInput } from "./windows/dashboard/WifiPassword.js";
 import { PowerMenu, Verification } from "./windows/PowerMenu.js";
 import Calendar from "./windows/calendar.js";
 import { Clipboard } from "./windows/clipboard.js";
+import { sysMonitor } from "./windows/sysMonitor.js";
 
-const monitors = JSON.parse(exec("hyprctl -j monitors"));
+const monitors: { id: number }[] = JSON.parse(exec("hyprctl -j monitors"));
 const forMonitors = (widget) => monitors.map((mon) => widget(mon.id));
 
 App.config({
@@ -20,6 +21,7 @@ App.config({
 		notifBoard(),
 		forMonitors(notifDisplay),
 		forMonitors(desktopClock),
+		forMonitors(sysMonitor),
 		dashboard(),
 		PasswordInput(),
 		PowerMenu(),

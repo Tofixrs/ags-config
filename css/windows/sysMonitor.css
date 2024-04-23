@@ -1,0 +1,21 @@
+window#sysMonitor {
+	background-color: transparent;
+}
+
+.sysMonitor > .stat-wrapper {
+	min-height: 210px;
+	min-width: 200px;
+	margin: 0 15px;
+}
+
+.sysMonitor .stat .icon {
+	font-size: 75px;
+}
+
+.sysMonitor .cpu {
+	color: @base08;
+}
+
+.sysMonitor .ram {
+	color: @base0D;
+}
