@@ -2,6 +2,7 @@ import Widget from "resource:///com/github/Aylur/ags/widget.js";
 import RegularWindow from "../globalWidgets/RegularWindow.js";
 import Variable from "resource:///com/github/Aylur/ags/variable.js";
 import { clipboard, utils } from "../lib/index.js";
+import { Align } from "types/@girs/gtk-3.0/gtk-3.0.cjs";
 
 const history = Variable<clipboard.HistEntry[]>([], {
 	poll: [500, () => clipboard.getHistory()],
@@ -41,10 +42,16 @@ function Header() {
 }
 
 function Entries() {
-	return Widget.Box({
-		class_name: "entries",
-		vertical: true,
-	}).hook(history, (self) => (self.children = history.value.map(Entry)));
+	return Widget.Scrollable({
+		hscroll: "never",
+		vscroll: "automatic",
+		hexpand: true,
+		height_request: 500,
+		child: Widget.Box({
+			class_name: "entries",
+			vertical: true,
+		}).hook(history, (self) => (self.children = history.value.map(Entry))),
+	});
 }
 
 function Entry(hist: clipboard.HistEntry) {
@@ -62,6 +69,7 @@ function Entry(hist: clipboard.HistEntry) {
 					wrap: true,
 					max_width_chars: 40,
 					hexpand: true,
+					halign: Align.START,
 				}),
 				Widget.Box({
 					vertical: true,
