@@ -81,8 +81,6 @@ function Entry(hist: clipboard.HistEntry) {
 							vpack: "center",
 							on_clicked: () => {
 								hist.removeEntry();
-								console.log("e");
-
 								history.setValue(clipboard.getHistory());
 							},
 						}),

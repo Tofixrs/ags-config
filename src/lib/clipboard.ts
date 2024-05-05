@@ -1,3 +1,5 @@
+import { utils } from "./index";
+
 export class HistEntry {
 	id: number;
 	text: string;
@@ -8,11 +10,11 @@ export class HistEntry {
 	}
 
 	removeEntry() {
-		Utils.execAsync(`bash -c "echo ${this.id} | cliphist delete ${this.text}"`);
+		utils.bash(`echo ${this.id} | cliphist delete`);
 	}
 
 	copy() {
-		Utils.execAsync(`cliphist decode ${this.id} | wl-copy`);
+		utils.bash(`cliphist decode ${this.id} | wl-copy`);
 	}
 }
 

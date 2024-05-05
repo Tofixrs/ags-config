@@ -114,3 +114,12 @@ export async function sh(cmd: string | string[]) {
 		return "";
 	});
 }
+
+export async function bash(cmd: string | string[]) {
+	return Utils.execAsync(
+		`bash -c "${typeof cmd === "string" ? cmd : cmd.join("")}"`,
+	).catch((err) => {
+		console.error(typeof cmd === "string" ? cmd : cmd.join(" "), err);
+		return "";
+	});
+}
