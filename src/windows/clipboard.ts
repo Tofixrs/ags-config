@@ -2,7 +2,7 @@ import Widget from "resource:///com/github/Aylur/ags/widget.js";
 import RegularWindow from "../globalWidgets/RegularWindow.js";
 import Variable from "resource:///com/github/Aylur/ags/variable.js";
 import { clipboard, utils } from "../lib/index.js";
-import { Align } from "types/@girs/gtk-3.0/gtk-3.0.cjs";
+import Gtk from "gi://Gtk?version=3.0";
 
 const history = Variable<clipboard.HistEntry[]>([], {
 	poll: [500, () => clipboard.getHistory()],
@@ -69,7 +69,7 @@ function Entry(hist: clipboard.HistEntry) {
 					wrap: true,
 					max_width_chars: 40,
 					hexpand: true,
-					halign: Align.START,
+					halign: Gtk.Align.START,
 				}),
 				Widget.Box({
 					vertical: true,
