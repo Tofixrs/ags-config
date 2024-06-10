@@ -16,6 +16,14 @@ export class HistEntry {
 	copy() {
 		utils.bash(`cliphist decode ${this.id} | wl-copy`);
 	}
+	isImage() {
+		return /^\[\[.binary.data.(\S{1,}.){2}(png|jpeg|jpg|gif).(\S{1,}.)\]\]$/.test(
+			this.text,
+		);
+	}
+	getImageType() {
+		return this.text.split(" ")[5];
+	}
 }
 
 export function getHistory(): HistEntry[] {

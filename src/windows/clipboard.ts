@@ -3,9 +3,11 @@ import RegularWindow from "../globalWidgets/RegularWindow.js";
 import Variable from "resource:///com/github/Aylur/ags/variable.js";
 import { clipboard, utils } from "../lib/index.js";
 import Gtk from "gi://Gtk?version=3.0";
+import Gtk30 from "gi://Gtk?version=3.0";
+import { exec } from "resource:///com/github/Aylur/ags/utils.js";
 
 const history = Variable<clipboard.HistEntry[]>([], {
-	poll: [500, () => clipboard.getHistory()],
+	poll: [1000000, () => clipboard.getHistory()],
 });
 
 //very cursed solution lol
@@ -47,6 +49,7 @@ function Entries() {
 		vscroll: "automatic",
 		hexpand: true,
 		height_request: 500,
+		maxContentWidth: 500,
 		child: Widget.Box({
 			class_name: "entries",
 			vertical: true,
@@ -55,6 +58,26 @@ function Entries() {
 }
 
 function Entry(hist: clipboard.HistEntry) {
+	if (hist.isImage()) {
+		utils.bash(`mkdir -p /tmp/ags/hist`);
+		exec(
+			`bash -c "cliphist decode ${hist.id} >> /tmp/ags/hist/${hist.id}.${hist.getImageType()}"`,
+		);
+	}
+	const label = Widget.Label({
+		label: hist.text,
+		wrap: true,
+		max_width_chars: 40,
+		hexpand: true,
+		halign: Gtk.Align.START,
+	});
+
+	const content = hist.isImage()
+		? Gtk30.Image.new_from_file(
+				`/tmp/ags/hist/${hist.id}.${hist.getImageType()}`,
+			)
+		: label;
+
 	return Widget.EventBox({
 		class_name: "entry",
 		on_primary_click: () => {
@@ -64,13 +87,7 @@ function Entry(hist: clipboard.HistEntry) {
 		},
 		child: Widget.Box({
 			children: [
-				Widget.Label({
-					label: hist.text,
-					wrap: true,
-					max_width_chars: 40,
-					hexpand: true,
-					halign: Gtk.Align.START,
-				}),
+				content,
 				Widget.Box({
 					vertical: true,
 					children: [
