@@ -5,6 +5,7 @@ import { clipboard, utils } from "../lib/index.js";
 import Gtk from "gi://Gtk?version=3.0";
 import Gtk30 from "gi://Gtk?version=3.0";
 import { exec } from "resource:///com/github/Aylur/ags/utils.js";
+import GLib20 from "gi://GLib?version=2.0";
 
 const history = Variable<clipboard.HistEntry[]>([], {
 	poll: [1000000, () => clipboard.getHistory()],
@@ -60,9 +61,16 @@ function Entries() {
 function Entry(hist: clipboard.HistEntry) {
 	if (hist.isImage()) {
 		utils.bash(`mkdir -p /tmp/ags/hist`);
-		exec(
-			`bash -c "cliphist decode ${hist.id} >> /tmp/ags/hist/${hist.id}.${hist.getImageType()}"`,
-		);
+		if (
+			!GLib20.file_test(
+				`/tmp/ags/hist/${hist.id}.${hist.getImageType()}`,
+				GLib20.FileTest.EXISTS,
+			)
+		) {
+			exec(
+				`bash -c "cliphist decode ${hist.id} >> /tmp/ags/hist/${hist.id}.${hist.getImageType()}"`,
+			);
+		}
 	}
 	const label = Widget.Label({
 		label: hist.text,
