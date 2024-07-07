@@ -6,6 +6,7 @@ import Gtk from "gi://Gtk?version=3.0";
 import Gtk30 from "gi://Gtk?version=3.0";
 import { exec } from "resource:///com/github/Aylur/ags/utils.js";
 import GLib20 from "gi://GLib?version=2.0";
+import { hyprland } from "../lib/index.js";
 
 const history = Variable<clipboard.HistEntry[]>([], {
 	poll: [1000000, () => clipboard.getHistory()],
@@ -20,11 +21,10 @@ App.connect("window-toggled", (_, name, visible) => {
 
 	history.setValue(clipboard.getHistory());
 
-	utils.sh("hyprctl cursorpos").then((out) => {
-		const [x, y] = out.split(", ");
-
-		utils.sh(`hyprctl keyword windowrulev2 "move ${x} ${y}, title:clipboard"`);
-	});
+	const cursorPos = hyprland.monitorMap.getCursorPosOnCurrentMonitor();
+	utils.sh(
+		`hyprctl keyword windowrulev2 "move ${cursorPos.x} ${cursorPos.y}, title:clipboard"`,
+	);
 });
 
 function Header() {
