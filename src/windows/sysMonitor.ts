@@ -4,7 +4,7 @@ import { cpu, ram } from "../variables.js";
 export function sysMonitor(mon: number) {
 	return Widget.Window({
 		layer: "bottom",
-		name: "sysMonitor",
+		name: `sysMonito${mon}`,
 		monitor: mon,
 		anchor: ["top", "left"],
 		child: Widget.EventBox({
