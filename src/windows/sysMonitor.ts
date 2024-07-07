@@ -4,9 +4,10 @@ import { cpu, ram } from "../variables.js";
 export function sysMonitor(mon: number) {
 	return Widget.Window({
 		layer: "bottom",
-		name: `sysMonito${mon}`,
+		name: `sysMonitor${mon}`,
 		monitor: mon,
 		anchor: ["top", "left"],
+		class_names: ["sysMon"],
 		child: Widget.EventBox({
 			on_primary_click: () => Utils.execAsync('bash -c "$TERMINAL -e btop"'),
 			child: Widget.Box({
