@@ -1,8 +1,10 @@
 import Widget from "resource:///com/github/Aylur/ags/widget.js";
 import icons from "../../../icons.js";
-import { Menu, ArrowToggleButton } from "../SubMenu.js";
+import { ArrowToggleButton } from "../SubMenu.js";
 import Bluetooth from "resource:///com/github/Aylur/ags/service/bluetooth.js";
 import { BluetoothDevice } from "types/service/bluetooth.js";
+import { opened } from "../dashboard.js";
+import { Menu } from "../../../globalWidgets/subMenu.js";
 
 export const BluetoothToggle = () =>
 	ArrowToggleButton({
@@ -51,11 +53,15 @@ const DeviceItem = (device: BluetoothDevice) =>
 	});
 
 export const BluetoothDevices = () =>
-	Menu("bluetooth", [
-		Widget.Box({
-			hexpand: true,
-			vertical: true,
-		}).bind("children", Bluetooth, "devices", (ds) =>
-			ds.filter((d) => d.name).map(DeviceItem),
-		),
-	]);
+	Menu(
+		"bluetooth",
+		[
+			Widget.Box({
+				hexpand: true,
+				vertical: true,
+			}).bind("children", Bluetooth, "devices", (ds) =>
+				ds.filter((d) => d.name).map(DeviceItem),
+			),
+		],
+		opened,
+	);

@@ -19,6 +19,7 @@
       packages = {
         default = pkgs.callPackage ./nix {};
       };
+      homeManagerModules.default = import ./nix/homeManager.nix;
     });
 
   inputs = {

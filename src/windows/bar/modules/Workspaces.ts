@@ -25,7 +25,7 @@ const wsBtn = (id: number) =>
 		vpack: "center",
 		hpack: "center",
 		on_clicked: () => workspace(id.toString()),
-	}).hook(Hyprland.active.workspace, (self) => {
+	}).hook(Hyprland, (self) => {
 		self.toggleClassName(
 			"active",
 			Hyprland.active.workspace.id == self.attribute.id,

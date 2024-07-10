@@ -2,13 +2,14 @@ import Audio, {
 	Stream,
 } from "resource:///com/github/Aylur/ags/service/audio.js";
 import { Variable } from "resource:///com/github/Aylur/ags/variable.js";
-import { Arrow, Menu } from "../SubMenu.js";
 import { VolumeIndicator } from "../../../globalWidgets/volume.js";
 import { fontIcon } from "../../../globalWidgets/icons.js";
 import icons from "../../../icons.js";
 import Gtk from "gi://Gtk?version=3.0";
+import { Menu, Arrow } from "../../../globalWidgets/subMenu.js";
 import { lookUpIcon } from "resource:///com/github/Aylur/ags/utils.js";
-import {utils} from "../../../lib/index.js"
+import { utils } from "../../../lib/index.js";
+import { opened } from "../dashboard.js";
 
 const apps = new Variable(0);
 
@@ -22,8 +23,8 @@ export function Volume() {
 				children: [
 					VolumeIndicator(),
 					VolumeSlider(),
-					Arrow("app-mixer"),
-					Arrow("sink-selector"),
+					Arrow("app-mixer", opened),
+					Arrow("sink-selector", opened),
 				],
 			}),
 			AppMixer(),
@@ -33,38 +34,43 @@ export function Volume() {
 }
 
 function AppMixer() {
-	return Menu("app-mixer", [
-		Widget.Box({
-			class_names: ["menu-title"],
-			children: [
-				fontIcon(icons.audio.misc.mixer),
-				Widget.Separator({ vpack: "center" }),
-				Widget.Label("App Mixer"),
-			],
-		}),
-		Widget.Separator({ orientation: Gtk.Orientation.HORIZONTAL }),
-		Widget.Scrollable({
-			hscroll: "never",
-			vscroll: "automatic",
-			class_names: ["menu-contents"],
-			vexpand: true,
-			min_content_height: 25,
-			vpack: "end",
-			child: Widget.Box({
-				vertical: true,
-				vexpand: true,
-			}).bind("children", Audio, "apps", (a) => {
-				const b = a.filter(
-					(steam) => steam.description != "AudioCallbackDriver",
-				);
-				apps.setValue(b.length);
-				return b.map(MixerItem);
+	return Menu(
+		"app-mixer",
+		[
+			Widget.Box({
+				class_names: ["menu-title"],
+				children: [
+					fontIcon(icons.audio.misc.mixer),
+					Widget.Separator({ vpack: "center" }),
+					Widget.Label("App Mixer"),
+				],
 			}),
-		}).hook(
-			Audio,
-			(self) => (self["min_content_height"] = Math.min(300, apps.value * 47.5)),
-		),
-	]);
+			Widget.Separator({ orientation: Gtk.Orientation.HORIZONTAL }),
+			Widget.Scrollable({
+				hscroll: "never",
+				vscroll: "automatic",
+				class_names: ["menu-contents"],
+				vexpand: true,
+				min_content_height: 25,
+				vpack: "end",
+				child: Widget.Box({
+					vertical: true,
+					vexpand: true,
+				}).bind("children", Audio, "apps", (a) => {
+					const b = a.filter(
+						(steam) => steam.description != "AudioCallbackDriver",
+					);
+					apps.setValue(b.length);
+					return b.map(MixerItem);
+				}),
+			}).hook(
+				Audio,
+				(self) =>
+					(self["min_content_height"] = Math.min(300, apps.value * 47.5)),
+			),
+		],
+		opened,
+	);
 }
 
 const SinkItem = (stream: Stream) =>
@@ -91,20 +97,24 @@ const SinkItem = (stream: Stream) =>
 	});
 
 function SinkSelector() {
-	return Menu("sink-selector", [
-		Widget.Box({
-			class_names: ["menu-title"],
-			children: [
-				fontIcon(icons.audio.misc.mixer),
-				Widget.Separator({ vpack: "center" }),
-				Widget.Label("Sink Selector"),
-			],
-		}),
-		Widget.Separator({ orientation: Gtk.Orientation.HORIZONTAL }),
-		Widget.Box({
-			vertical: true,
-		}).bind("children", Audio, "speakers", (s) => s.map(SinkItem)),
-	]);
+	return Menu(
+		"sink-selector",
+		[
+			Widget.Box({
+				class_names: ["menu-title"],
+				children: [
+					fontIcon(icons.audio.misc.mixer),
+					Widget.Separator({ vpack: "center" }),
+					Widget.Label("Sink Selector"),
+				],
+			}),
+			Widget.Separator({ orientation: Gtk.Orientation.HORIZONTAL }),
+			Widget.Box({
+				vertical: true,
+			}).bind("children", Audio, "speakers", (s) => s.map(SinkItem)),
+		],
+		opened,
+	);
 }
 
 const MixerItem = (stream: Stream) =>

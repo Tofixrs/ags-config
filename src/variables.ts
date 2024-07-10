@@ -1,4 +1,5 @@
 import GLib from "gi://GLib";
+import Gio from "gi://Gio";
 import Variable from "resource:///com/github/Aylur/ags/variable.js";
 
 const intval = 5000;
@@ -76,3 +77,6 @@ export const uptime = Variable("", {
 
 const divide = ([total, free]: [string, string] | string[]) =>
 	Number.parseInt(free) / Number.parseInt(total);
+
+export const xdgConfig = GLib.getenv("XDG_CONFIG_HOME") as string;
+export const xdgData = GLib.getenv("XDG_DATA_HOME") as string;

@@ -1,0 +1,46 @@
+.desktop .bg {
+	background-color: @base00;
+	border-radius: 25px;
+	padding: 0.25em 1em;
+}
+
+.desktop .columns > box {
+	margin: 0 50px;
+}
+
+.desktop-clock label:nth-child(1) {
+	text-shadow: 5px 5px 2px black;
+	font-size: 100px;
+}
+
+.desktop-clock label:nth-child(2) {
+	text-shadow: 2px 2px 2px black;
+	font-size: 25px;
+}
+
+.stat-wrapper .stat {
+	min-height: 175px;
+	min-width: 175px;
+}
+
+.stat-wrapper .stat .icon {
+	font-size: 75px;
+}
+
+.stat-wrapper .cpu {
+	color: @base08;
+}
+
+.stat-wrapper .ram {
+	color: @base0D;
+}
+
+.desktop .weather {
+	font-size: 50px;
+	margin-top: 0.5em;
+}
+
+.desktop .citySubMenu > button {
+	font-size: 20px;
+	margin-top: 10px;
+}

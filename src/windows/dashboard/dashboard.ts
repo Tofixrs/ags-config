@@ -5,6 +5,9 @@ import { ToggleSwitches } from "./modules/ToggleSwitches.js";
 import Mpris from "../../globalWidgets/Mpris.js";
 import Header from "./modules/Header.js";
 import PopupWindow from "../../globalWidgets/PopupWindow.js";
+import Variable from "resource:///com/github/Aylur/ags/variable.js";
+
+export const opened = Variable("");
 
 export function Group(children: Gtk.Widget[]) {
 	return Widget.Box({

@@ -21,7 +21,7 @@ App.connect("window-toggled", (_, name, visible) => {
 
 	history.setValue(clipboard.getHistory());
 
-	const cursorPos = hyprland.monitorMap.getCursorPosOnCurrentMonitor();
+	const cursorPos = hyprland.getCursorPosOnCurrentMonitor();
 	utils.sh(
 		`hyprctl keyword windowrulev2 "move ${cursorPos.x} ${cursorPos.y}, title:clipboard"`,
 	);
