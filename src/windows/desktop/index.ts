@@ -10,6 +10,7 @@ import weather from "./modules/weather.js";
 import Variable from "resource:///com/github/Aylur/ags/variable.js";
 import Hyprland from "resource:///com/github/Aylur/ags/service/hyprland.js";
 import Todo from "./modules/todo.js";
+import Mpris from "../../globalWidgets/Mpris.js";
 
 export const subMenu = Variable("");
 
@@ -62,7 +63,7 @@ const StartWidget = () =>
 const CenterWidget = () =>
 	Box({
 		vertical: true,
-		children: [clock(), weather()],
+		children: [clock(), weather(), VS(), Mpris()],
 	});
 
 const EndWidget = () =>
@@ -72,3 +73,4 @@ const EndWidget = () =>
 	});
 
 export const S = () => Box({ hexpand: true });
+export const VS = () => Box({ vexpand: true });
