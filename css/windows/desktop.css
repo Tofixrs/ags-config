@@ -1,3 +1,7 @@
+window#desktop-top {
+	background-color: rgba(30, 30, 46, 0.2);
+}
+
 .desktop .bg {
 	background-color: @base00;
 	border-radius: 25px;

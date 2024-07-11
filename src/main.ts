@@ -10,7 +10,7 @@ import { Clipboard } from "./windows/clipboard.js";
 import desktop from "./windows/desktop/index.js";
 
 const monitors: { id: number }[] = JSON.parse(exec("hyprctl -j monitors"));
-const forMonitors = (widget) => monitors.map((mon) => widget(mon.id));
+const forMonitors = (widget: any) => monitors.map((mon) => widget(mon.id));
 
 App.config({
 	maxStreamVolume: 2.0,
@@ -19,13 +19,16 @@ App.config({
 		forMonitors(Bar),
 		notifBoard(),
 		forMonitors(notifDisplay),
-		forMonitors(desktop),
+		forMonitors((mon: any) =>
+			desktop({ name: `mon${mon}`, monitor: mon, layer: "bottom" }),
+		),
 		dashboard(),
 		PasswordInput(),
 		PowerMenu(),
 		Verification(),
 		Calendar(),
 		Clipboard(),
+		desktop({ name: "top", layer: "top" }),
 	].flat(2),
 	closeWindowDelay: {
 		dashboard: 200,
