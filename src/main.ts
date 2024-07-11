@@ -8,6 +8,7 @@ import { PowerMenu, Verification } from "./windows/PowerMenu.js";
 import Calendar from "./windows/calendar.js";
 import { Clipboard } from "./windows/clipboard.js";
 import desktop from "./windows/desktop/index.js";
+import TodoAddForm from "./windows/desktop/TodoAddForm.ts";
 
 const monitors: { id: number }[] = JSON.parse(exec("hyprctl -j monitors"));
 const forMonitors = (widget: any) => monitors.map((mon) => widget(mon.id));
@@ -29,6 +30,7 @@ App.config({
 		Calendar(),
 		Clipboard(),
 		desktop({ name: "top", layer: "top" }),
+		TodoAddForm(),
 	].flat(2),
 	closeWindowDelay: {
 		dashboard: 200,

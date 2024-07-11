@@ -1,10 +1,10 @@
 import GLib from "gi://GLib";
-import { Props } from "types/widgets/label";
+import { LabelProps } from "types/widgets/label";
 
 export default (
 	format: string = "%H:%M:%S %B %e. %A",
 	interval: number = 1000,
-	props?: Props,
+	props?: LabelProps,
 ) => {
 	return Widget.Label({
 		...props,

@@ -1,0 +1,23 @@
+window#todoAddForm {
+	background-color: transparent;
+}
+
+.todo-add-form-wrapper {
+	padding: 20px;
+}
+
+.todo-add-form {
+	background-color: @base00;
+	padding: 50px 20px;
+	border-radius: 15px;
+	box-shadow: 0px 0px 10px 10px @base01;
+}
+
+.todo-add-form .title {
+	font-size: 25px;
+	padding: 10px;
+}
+
+.todo-add-form {
+	min-width: 350px;
+}

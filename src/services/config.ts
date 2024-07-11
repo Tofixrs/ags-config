@@ -1,6 +1,5 @@
 import GLib from "gi://GLib?version=2.0";
 import { xdgConfig, xdgData } from "../variables.js";
-import Gio20 from "gi://Gio?version=2.0";
 import WeatherService from "./Weather.js";
 
 interface ConfigData {
@@ -14,6 +13,22 @@ interface Weather {
 
 interface PersistentData {
 	selectedCity: number;
+	todos: Day[];
+}
+
+export interface Day {
+	day: number;
+	month: number;
+	year: number;
+	tasks: Todo[];
+}
+
+export interface Todo {
+	text: string;
+	finished: boolean;
+	neededTasks: Todo[];
+	id: string;
+	parentID?: string;
 }
 
 const persistentDataPath = `${xdgData}/ags-config/data.json`;
@@ -46,7 +61,7 @@ class Config extends Service {
 
 	get persistentData(): PersistentData {
 		if (!GLib.file_test(persistentDataPath, GLib.FileTest.EXISTS)) {
-			return { selectedCity: this.config.weather.defaultCity };
+			return { selectedCity: this.config.weather.defaultCity, todos: [] };
 		}
 
 		return JSON.parse(Utils.readFile(persistentDataPath));

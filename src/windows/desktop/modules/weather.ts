@@ -21,7 +21,10 @@ export default () => {
 					}),
 					hexpand: true,
 					on_clicked: () => {
-						Config.persistentData = { selectedCity: v.id };
+						const data = Config.persistentData;
+						data.selectedCity = v.id;
+						Config.persistentData = data;
+
 						subMenu.setValue("");
 					},
 				}),

@@ -9,6 +9,7 @@ import { CPU, Ram } from "./modules/sysMonitor.js";
 import weather from "./modules/weather.js";
 import Variable from "resource:///com/github/Aylur/ags/variable.js";
 import Hyprland from "resource:///com/github/Aylur/ags/service/hyprland.js";
+import Todo from "./modules/todo.js";
 
 export const subMenu = Variable("");
 
@@ -35,7 +36,7 @@ export default ({ monitor, name, layer }: DesktopProps) =>
 			end_widget: EndWidget(),
 		}),
 	}).hook(Hyprland, (self) => {
-		if (!monitor) return;
+		if (monitor == undefined) return;
 
 		const mon = Hyprland.getMonitor(monitor);
 		if (!mon) return;
@@ -67,6 +68,7 @@ const CenterWidget = () =>
 const EndWidget = () =>
 	Box({
 		vertical: true,
+		children: [Todo()],
 	});
 
 export const S = () => Box({ hexpand: true });
