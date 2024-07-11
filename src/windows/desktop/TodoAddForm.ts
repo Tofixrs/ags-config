@@ -3,7 +3,11 @@ import { Label, Box, Entry } from "resource:///com/github/Aylur/ags/widget.js";
 import PopupWindow from "../../globalWidgets/PopupWindow.js";
 import Config, { Todo } from "../../services/config.js";
 import GLib20 from "gi://GLib?version=2.0";
-import { getCurrentDayIndex, getCurrentDayTodos } from "./modules/todo.js";
+import {
+	SelectedDate,
+	getCurrentDayIndex,
+	getCurrentDayTodos,
+} from "./modules/todo.js";
 
 let parentID = "";
 
@@ -52,6 +56,14 @@ function addTodo(text: string) {
 	const todos = getCurrentDayTodos();
 	const copy = Config.persistentData;
 	const dayI = getCurrentDayIndex();
+	if (copy.todos[dayI] == undefined) {
+		copy.todos.push({
+			day: SelectedDate.value.getDate(),
+			month: SelectedDate.value.getMonth() + 1,
+			year: SelectedDate.value.getFullYear(),
+			tasks: [],
+		});
+	}
 
 	if (parentID == "") {
 		copy.todos[dayI].tasks.push(todo);

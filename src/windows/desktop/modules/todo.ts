@@ -11,7 +11,7 @@ import Gtk from "gi://Gtk?version=3.0";
 import BoxT from "types/widgets/box.js";
 import { requestAddTodo } from "../TodoAddForm.js";
 
-const SelectedDate = Variable(new Date());
+export const SelectedDate = Variable(new Date());
 const day = 24 * 60 * 60 * 1000;
 
 export function getCurrentDayTodos() {
@@ -25,13 +25,26 @@ export function getCurrentDayTodos() {
 	return selectedDay ? selectedDay.tasks : [];
 }
 export function getCurrentDayIndex() {
-	return Config.persistentData.todos.findIndex((d) => {
+	const result = Config.persistentData.todos.findIndex((d) => {
 		const day = d.day == SelectedDate.value.getDate();
 		const month = d.month == SelectedDate.value.getMonth() + 1;
 		const year = d.year == SelectedDate.value.getFullYear();
 
 		return day && month && year;
 	});
+	if (result == -1) {
+		const copy = Config.persistentData;
+		copy.todos.push({
+			day: SelectedDate.value.getDate(),
+			month: SelectedDate.value.getMonth() + 1,
+			year: SelectedDate.value.getFullYear(),
+			tasks: [],
+		});
+		Config.persistentData = copy;
+
+		return copy.todos.length - 1;
+	}
+	return result;
 }
 
 function checked(todo: Todo) {
