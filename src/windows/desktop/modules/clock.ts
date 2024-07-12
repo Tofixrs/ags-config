@@ -5,5 +5,5 @@ export default () =>
 	Box({
 		vertical: true,
 		class_names: ["desktop-clock"],
-		children: [clock("%H:%M:%S", 900), clock("%e %B %A")],
+		children: [clock("%H:%M:%S"), clock("%e %B %A")],
 	});
