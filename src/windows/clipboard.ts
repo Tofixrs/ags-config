@@ -7,6 +7,7 @@ import Gtk30 from "gi://Gtk?version=3.0";
 import { exec } from "resource:///com/github/Aylur/ags/utils.js";
 import GLib20 from "gi://GLib?version=2.0";
 import { hyprland } from "../lib/index.js";
+import GdkPixbuf20 from "gi://GdkPixbuf?version=2.0";
 
 const history = Variable<clipboard.HistEntry[]>([], {
 	poll: [1000000, () => clipboard.getHistory()],
@@ -48,8 +49,7 @@ function Entries() {
 	return Widget.Scrollable({
 		hscroll: "never",
 		vscroll: "automatic",
-		hexpand: true,
-		height_request: 500,
+		vexpand: true,
 		maxContentWidth: 500,
 		child: Widget.Box({
 			class_name: "entries",
@@ -75,16 +75,22 @@ function Entry(hist: clipboard.HistEntry) {
 	const label = Widget.Label({
 		label: hist.text,
 		wrap: true,
-		max_width_chars: 40,
+		max_width_chars: 200,
 		hexpand: true,
 		halign: Gtk.Align.START,
 	});
 
-	const content = hist.isImage()
-		? Gtk30.Image.new_from_file(
-				`/tmp/ags/hist/${hist.id}.${hist.getImageType()}`,
-			)
-		: label;
+	let content: Gtk.Widget = label;
+
+	if (hist.isImage()) {
+		const pixbuf = GdkPixbuf20.Pixbuf.new_from_file_at_scale(
+			`/tmp/ags/hist/${hist.id}.${hist.getImageType()}`,
+			500,
+			300,
+			true,
+		);
+		content = Gtk.Image.new_from_pixbuf(pixbuf);
+	}
 
 	return Widget.EventBox({
 		class_name: "entry",
@@ -98,12 +104,13 @@ function Entry(hist: clipboard.HistEntry) {
 				content,
 				Widget.Box({
 					vertical: true,
+					vpack: "center",
+					hpack: "end",
+					hexpand: true,
 					children: [
 						Widget.Button({
 							class_name: "trash_button",
 							label: "󰩺",
-							hpack: "center",
-							vpack: "center",
 							on_clicked: () => {
 								hist.removeEntry();
 								history.setValue(clipboard.getHistory());
@@ -127,7 +134,7 @@ export function Clipboard() {
 				win.hide();
 				return true;
 			});
-			win.set_default_size(300, 400);
+			win.set_default_size(500, 750);
 		},
 		child: Widget.Box({
 			class_name: "clipboard",

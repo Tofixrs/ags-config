@@ -18,5 +18,6 @@
 .trash_button {
 	border-radius: 50%;
 	background-color: transparent;
-	font-size: 10px;
+	min-width: 30px;
+	font-size: 30px;
 }
