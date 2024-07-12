@@ -1,4 +1,4 @@
-import Widget, { Box } from "resource:///com/github/Aylur/ags/widget.js";
+import { Box } from "resource:///com/github/Aylur/ags/widget.js";
 import clock from "../../../globalWidgets/clock.js";
 
 export default () =>

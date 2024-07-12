@@ -4,57 +4,27 @@ import {
 	Label,
 	Scrollable,
 } from "resource:///com/github/Aylur/ags/widget.js";
-import Variable from "resource:///com/github/Aylur/ags/variable.js";
 import { S } from "../index.js";
-import Config, { Todo } from "../../../services/config.js";
+import Config from "../../../services/config.js";
 import Gtk from "gi://Gtk?version=3.0";
 import BoxT from "types/widgets/box.js";
-import { requestAddTodo } from "../TodoAddForm.js";
+import {
+	getCurrentDayIndex,
+	removeTodo,
+	requestAddTodo,
+	SelectedDate,
+	updateTodos,
+	Todo,
+} from "../../../lib/todos.js";
 
-export const SelectedDate = Variable(new Date());
 const day = 24 * 60 * 60 * 1000;
 
-export function getCurrentDayTodos() {
-	const selectedDay = Config.persistentData.todos.find((d) => {
-		const day = d.day == SelectedDate.value.getDate();
-		const month = d.month == SelectedDate.value.getMonth() + 1;
-		const year = d.year == SelectedDate.value.getFullYear();
-
-		return day && month && year;
-	});
-	return selectedDay ? selectedDay.tasks : [];
-}
-export function getCurrentDayIndex() {
-	const result = Config.persistentData.todos.findIndex((d) => {
-		const day = d.day == SelectedDate.value.getDate();
-		const month = d.month == SelectedDate.value.getMonth() + 1;
-		const year = d.year == SelectedDate.value.getFullYear();
-
-		return day && month && year;
-	});
-	if (result == -1) {
-		const copy = Config.persistentData;
-		copy.todos.push({
-			day: SelectedDate.value.getDate(),
-			month: SelectedDate.value.getMonth() + 1,
-			year: SelectedDate.value.getFullYear(),
-			tasks: [],
-		});
-		Config.persistentData = copy;
-
-		return copy.todos.length - 1;
-	}
-	return result;
-}
-
 function checked(todo: Todo) {
-	const todos = getCurrentDayTodos();
-
-	function map(td: Todo): Todo {
+	function updateTasks(td: Todo): Todo {
 		if (td.id == todo.id) td.finished = !td.finished;
 
 		//recurse to complete branch tasks
-		const neededTasks = td.neededTasks.map(map);
+		const neededTasks = td.neededTasks.map(updateTasks);
 
 		//check if subtasks completed to complete self
 		const neededFinished = neededTasks.map((t) => Number(t.finished));
@@ -64,36 +34,14 @@ function checked(todo: Todo) {
 
 		return td;
 	}
-
-	const dayI = getCurrentDayIndex();
-
-	//copy cuz gotta fire set event
-	const copy = Config.persistentData;
-	copy.todos[dayI].tasks = todos.map(map);
-	Config.persistentData = copy;
-}
-
-function removeTodo(id: string) {
-	const todos = getCurrentDayTodos();
-	const copy = Config.persistentData;
-	const dayI = getCurrentDayIndex();
-
-	function map(todo: Todo) {
-		if (id == todo.id) return undefined;
-
-		//@ts-expect-error
-		todo.neededTasks = todo.neededTasks.map(map).filter((v) => v != undefined);
-		return todo;
-	}
-
-	//@ts-expect-error
-	copy.todos[dayI].tasks = todos.map(map).filter((v) => v != undefined);
-	Config.persistentData = copy;
+	updateTodos(updateTasks);
 }
 
 const TodoView = () => {
 	function updateTodoView(self: BoxT<Gtk.Widget, unknown>) {
-		const todos = getCurrentDayTodos();
+		const dayI = getCurrentDayIndex();
+		const todos = Config.persistentData.todos[dayI].tasks;
+
 		self.children = [
 			Box({
 				children: [...todos.map((v) => TodoCards(v, checked))],

@@ -1,6 +1,7 @@
 import GLib from "gi://GLib?version=2.0";
 import { xdgConfig, xdgData } from "../variables.js";
 import WeatherService from "./Weather.js";
+import { Todo } from "../lib/todos.js";
 
 interface ConfigData {
 	weather: Weather;
@@ -21,14 +22,6 @@ export interface Day {
 	month: number;
 	year: number;
 	tasks: Todo[];
-}
-
-export interface Todo {
-	text: string;
-	finished: boolean;
-	neededTasks: Todo[];
-	id: string;
-	parentID?: string;
 }
 
 const persistentDataPath = `${xdgData}/ags-config/data.json`;
