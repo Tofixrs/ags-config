@@ -44,7 +44,7 @@ const Project = (path: string) => {
 	const projectName = pathSplit[pathSplit.length - 1];
 	return EventBox({
 		visible: true,
-		on_primary_click: () => utils.bash(`$TERMINAL -e "nvim ${path}"`),
+		on_primary_click: () => utils.bash(`cd ${path} && $TERMINAL -e "nvim"`),
 		child: Box({
 			class_names: ["project"],
 			vertical: true,
