@@ -14,7 +14,7 @@ const history = Variable<clipboard.HistEntry[]>([], {
 
 //very cursed solution lol
 App.connect("window-toggled", (_, name, visible) => {
-	if (name != "clipboard" && !visible) return;
+	if (name != "clipboard" || !visible) return;
 
 	const window = App.getWindow("clipboard");
 	if (!window) return;
