@@ -6,6 +6,7 @@ window#desktop-top {
 	background-color: @base00;
 	border-radius: 25px;
 	padding: 0.25em 1em;
+	margin-top: 20px;
 }
 
 .desktop .columns > box {
@@ -69,4 +70,22 @@ window#desktop-top {
 	min-height: 10px;
 	margin-left: 5px;
 	margin-right: 5px;
+}
+
+.desktop .projects {
+	padding: 30px 30px;
+	padding-top: 10px;
+	font-size: 25px;
+}
+
+.desktop .projects > label {
+	padding-bottom: 20px;
+}
+
+.desktop .project {
+	font-size: 50px;
+}
+
+.desktop .project label {
+	font-size: 12.5px;
 }

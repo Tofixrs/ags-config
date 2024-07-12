@@ -11,6 +11,8 @@ import Variable from "resource:///com/github/Aylur/ags/variable.js";
 import Hyprland from "resource:///com/github/Aylur/ags/service/hyprland.js";
 import Todo from "./modules/todo.js";
 import Mpris from "../../globalWidgets/Mpris.js";
+import Projects from "./modules/projects.js";
+import { utils } from "../../lib/index.js";
 
 export const subMenu = Variable("");
 
@@ -53,6 +55,7 @@ const StartWidget = () =>
 		children: [
 			EventBox({
 				class_names: ["bg"],
+				on_primary_click: () => utils.bash('$TERMINAL -e "btop"'),
 				child: Box({
 					children: [S(), CPU(), S(), Ram(), S()],
 				}),
@@ -69,7 +72,7 @@ const CenterWidget = () =>
 const EndWidget = () =>
 	Box({
 		vertical: true,
-		children: [Todo()],
+		children: [Todo(), Projects()],
 	});
 
 export const S = () => Box({ hexpand: true });

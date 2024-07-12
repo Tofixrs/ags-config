@@ -62,7 +62,7 @@ const TodoView = () => {
 	return Scrollable({
 		vscroll: "always",
 		hscroll: "never",
-		height_request: 500,
+		height_request: 250,
 		max_content_width: 250,
 		child: content,
 	});
