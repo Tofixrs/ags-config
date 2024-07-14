@@ -1,0 +1,21 @@
+{
+	"name": "ags-config",
+	"version": "2.0.0",
+	"description": "My ags shell",
+	"main": "./dist/config.js",
+	"author": "Tofixrs",
+	"type": "module",
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/Tofixrs/ags-config"
+	},
+	"dependencies": {
+		"resolve-tspaths": "^0.8.19"
+	},
+	"scripts": {
+		"build": "tsc || true && resolve-tspaths -o ./dist/src && sass ./style/main.scss ./dist/src/style.css",
+		"start": "cd ./dist/src && ags -c \"./index.js\" --bus-name test",
+		"update-types": "rm -rf ./types && cp -r ~/.local/share/com.github.Aylur.ags/types ./",
+		"fixup-paths": "resolve-tspaths -o ./dist/src"
+	}
+}

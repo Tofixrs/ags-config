@@ -1,0 +1,30 @@
+.bar {
+	background-color: transparent;
+	font-size: 12px;
+
+	.component {
+		background-color: $base00;
+		padding: 0.5em 1em;
+		border-radius: 1em;
+	}
+
+	.sepDot {
+		background-color: transparentize($color: gray, $amount: 0.5);
+		min-width: 5px;
+		min-height: 5px;
+		border-radius: 50%;
+		margin-left: 5px;
+		margin-right: 5px;
+	}
+
+	.btn-wrap {
+		min-height: unset;
+		background-color: $base00;
+		padding: 0.5em 1em;
+		border-radius: 1em;
+		.component {
+			all: unset;
+			font-size: 10px;
+		}
+	}
+}

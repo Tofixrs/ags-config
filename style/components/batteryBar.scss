@@ -1,0 +1,14 @@
+.batteryBar {
+	levelbar {
+		block {
+			&.filled {
+				background-color: $base0B;
+			}
+			&.empty {
+				background-color: $base02;
+			}
+			border-radius: 1em;
+			min-height: 7.5px;
+		}
+	}
+}
