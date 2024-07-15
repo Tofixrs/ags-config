@@ -6,8 +6,8 @@ import { Box, Button, Icon } from "resource:///com/github/Aylur/ags/widget.js";
 export const Tray = () =>
 	Box({
 		class_names: ["component", "tray"],
-		visible: SystemTray.bind("items").as((items) => items.length > 0),
 		children: SystemTray.bind("items").as((items) => items.map(Item)),
+		visible: SystemTray.bind("items").as((items) => items.length > 0),
 	});
 
 const Item = (item: TrayItem) =>
