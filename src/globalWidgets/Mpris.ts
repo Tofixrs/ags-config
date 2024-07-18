@@ -9,8 +9,7 @@ import { StackProps } from "types/widgets/stack.js";
 import { IconProps } from "types/widgets/icon.js";
 import { Variable } from "resource:///com/github/Aylur/ags/variable.js";
 import { utils } from "../lib/index.js";
-import Gio20 from "gi://Gio";
-import GLib from "types/@girs/glib-2.0/glib-2.0.js";
+import GLib from "gi://GLib?version=2.0";
 
 export const BlurredCoverArt = (player: MprisPlayer, props?: BoxProps) =>
 	Widget.Box({
@@ -23,44 +22,8 @@ export const BlurredCoverArt = (player: MprisPlayer, props?: BoxProps) =>
 						img && box.setCss(`background-image: url("${img}")`);
 					});
 				}
-				if (player.metadata["mpris:artUrl"]) {
-					fetchArt(player.metadata["mpris:artUrl"])
-						.then((file) => utils.blurImg(file.get_path() || ""))
-						.then((img) => {
-							print(img);
-							img && box.setCss(`background-image: url("${img}")`);
-						});
-				}
 			}),
 	});
-
-async function fetchArt(url: string) {
-	const res = await Utils.fetch(url);
-	const bytes = await res.gBytes();
-
-	const dir = Utils.CACHE_DIR + "/media";
-	const file = Gio20.File.new_for_path(`${dir}/${url}`);
-
-	if (GLib.file_test(file.get_path() || "", GLib.FileTest.EXISTS)) return file;
-
-	return new Promise<Gio20.File>((resolve, reject) => {
-		file.replace_contents_bytes_async(
-			bytes || new GLib.Bytes(null),
-			null,
-			false,
-			Gio20.FileCreateFlags.REPLACE_DESTINATION,
-			null,
-			(_, res) => {
-				try {
-					file.replace_contents_finish(res);
-					resolve(file);
-				} catch (error) {
-					reject(error);
-				}
-			},
-		);
-	});
-}
 
 export const CoverArt = (player: MprisPlayer, props?: BoxProps) =>
 	Widget.Box({
@@ -68,19 +31,12 @@ export const CoverArt = (player: MprisPlayer, props?: BoxProps) =>
 		class_name: "cover",
 		css: player
 			.bind("cover_path")
+			.transform((p) => {
+				if (!p) return "";
+				utils.bash(`convert ${p} ${p}.png`);
+				return `${p}.png`;
+			})
 			.transform((p) => `background-image: url("${p}")`),
-		setup: (self) =>
-			self.hook(player, (self) => {
-				if (player.cover_path) {
-					return self.setCss(`background-image: url(${player.cover_path})`);
-				}
-
-				if (player.metadata["mpris:artUrl"]) {
-					fetchArt(player.metadata["mpris:artUrl"]).then((file) => {
-						self.setCss(`background-image: url(${file.get_path()})`);
-					});
-				}
-			}),
 	});
 
 export const TitleLabel = (player: MprisPlayer, props?: LabelProps) =>
