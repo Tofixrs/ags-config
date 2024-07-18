@@ -9,21 +9,57 @@ import { StackProps } from "types/widgets/stack.js";
 import { IconProps } from "types/widgets/icon.js";
 import { Variable } from "resource:///com/github/Aylur/ags/variable.js";
 import { utils } from "../lib/index.js";
+import Gio20 from "gi://Gio";
+import GLib from "types/@girs/glib-2.0/glib-2.0.js";
 
 export const BlurredCoverArt = (player: MprisPlayer, props?: BoxProps) =>
 	Widget.Box({
 		...props,
 		class_name: "blurred-cover",
 		setup: (self) =>
-			self.hook(
-				player,
-				(box) =>
+			self.hook(player, (box) => {
+				if (player.cover_path) {
 					utils.blurImg(player.cover_path).then((img) => {
 						img && box.setCss(`background-image: url("${img}")`);
-					}),
-				"notify::cover-path",
-			),
+					});
+				}
+				if (player.metadata["mpris:artUrl"]) {
+					const timestamp = new Date().getTime();
+					fetchArt(player.metadata["mpris:artUrl"], timestamp.toString())
+						.then((file) => utils.blurImg(file.get_path() || ""))
+						.then((img) => {
+							print(img);
+							img && box.setCss(`background-image: url("${img}")`);
+						});
+				}
+			}),
 	});
+
+async function fetchArt(url: string, name: string) {
+	const res = await Utils.fetch(url);
+	const bytes = await res.gBytes();
+
+	const dir = Utils.CACHE_DIR + "/media";
+	const file = Gio20.File.new_for_path(`${dir}/${name}`);
+
+	return new Promise<Gio20.File>((resolve, reject) => {
+		file.replace_contents_bytes_async(
+			bytes || new GLib.Bytes(null),
+			null,
+			false,
+			Gio20.FileCreateFlags.REPLACE_DESTINATION,
+			null,
+			(_, res) => {
+				try {
+					file.replace_contents_finish(res);
+					resolve(file);
+				} catch (error) {
+					reject(error);
+				}
+			},
+		);
+	});
+}
 
 export const CoverArt = (player: MprisPlayer, props?: BoxProps) =>
 	Widget.Box({

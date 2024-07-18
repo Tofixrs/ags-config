@@ -97,7 +97,7 @@ export function blurImg(img: string) {
 		if (!img) resolve("");
 
 		const dir = cache + "/blurred";
-		const blurred = dir + img.substring(cache.length);
+		const blurred = dir + img.substring(cache.length) + ".png";
 
 		if (GLib.file_test(blurred, GLib.FileTest.EXISTS)) return resolve(blurred);
 
