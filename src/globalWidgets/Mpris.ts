@@ -24,8 +24,7 @@ export const BlurredCoverArt = (player: MprisPlayer, props?: BoxProps) =>
 					});
 				}
 				if (player.metadata["mpris:artUrl"]) {
-					const timestamp = new Date().getTime();
-					fetchArt(player.metadata["mpris:artUrl"], timestamp.toString())
+					fetchArt(player.metadata["mpris:artUrl"])
 						.then((file) => utils.blurImg(file.get_path() || ""))
 						.then((img) => {
 							print(img);
@@ -35,12 +34,14 @@ export const BlurredCoverArt = (player: MprisPlayer, props?: BoxProps) =>
 			}),
 	});
 
-async function fetchArt(url: string, name: string) {
+async function fetchArt(url: string) {
 	const res = await Utils.fetch(url);
 	const bytes = await res.gBytes();
 
 	const dir = Utils.CACHE_DIR + "/media";
-	const file = Gio20.File.new_for_path(`${dir}/${name}`);
+	const file = Gio20.File.new_for_path(`${dir}/${url}`);
+
+	if (GLib.file_test(file.get_path() || "", GLib.FileTest.EXISTS)) return file;
 
 	return new Promise<Gio20.File>((resolve, reject) => {
 		file.replace_contents_bytes_async(
@@ -68,6 +69,18 @@ export const CoverArt = (player: MprisPlayer, props?: BoxProps) =>
 		css: player
 			.bind("cover_path")
 			.transform((p) => `background-image: url("${p}")`),
+		setup: (self) =>
+			self.hook(player, (self) => {
+				if (player.cover_path) {
+					return self.setCss(`background-image: url(${player.cover_path})`);
+				}
+
+				if (player.metadata["mpris:artUrl"]) {
+					fetchArt(player.metadata["mpris:artUrl"]).then((file) => {
+						self.setCss(`background-image: url(${file.get_path()})`);
+					});
+				}
+			}),
 	});
 
 export const TitleLabel = (player: MprisPlayer, props?: LabelProps) =>
