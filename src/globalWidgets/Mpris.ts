@@ -29,14 +29,17 @@ export const CoverArt = (player: MprisPlayer, props?: BoxProps) =>
 	Widget.Box({
 		...props,
 		class_name: "cover",
-		css: player
-			.bind("cover_path")
-			.transform((p) => {
-				if (!p) return "";
-				utils.bash(`convert ${p} ${p}.png`);
-				return `${p}.png`;
-			})
-			.transform((p) => `background-image: url("${p}")`),
+		setup: (self) =>
+			self.hook(player, () => {
+				if (!player.cover_path) return;
+				if (!GLib.file_test(`${player.cover_path}.png`, GLib.FileTest.EXISTS))
+					return;
+				utils
+					.bash(`convert ${player.cover_path} ${player.cover_path}.png`)
+					.then(() => {
+						self.css = `background-image: url("${player.cover_path}.png")`;
+					});
+			}),
 	});
 
 export const TitleLabel = (player: MprisPlayer, props?: LabelProps) =>
