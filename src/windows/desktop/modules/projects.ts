@@ -15,7 +15,7 @@ App.connect("window-toggled", (_, name, visible) => {
 	if (!visible) return;
 
 	utils
-		.bash(`nvim -l ${App.configDir}/src/scripts/projects.lua`)
+		.bash(`cat ~/.local/share/nvf/project_nvim/project_history`)
 		.then((v) => {
 			projects.setValue(v.split("\n").filter((_, i) => i < 10));
 		})
