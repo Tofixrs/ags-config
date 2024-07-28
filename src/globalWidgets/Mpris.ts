@@ -32,8 +32,10 @@ export const CoverArt = (player: MprisPlayer, props?: BoxProps) =>
 		setup: (self) =>
 			self.hook(player, () => {
 				if (!player.cover_path) return;
-				if (!GLib.file_test(`${player.cover_path}.png`, GLib.FileTest.EXISTS))
+				if (GLib.file_test(`${player.cover_path}.png`, GLib.FileTest.EXISTS)) {
+					self.css = `background-image: url("${player.cover_path}.png")`;
 					return;
+				}
 				utils
 					.bash(`convert ${player.cover_path} ${player.cover_path}.png`)
 					.then(() => {
