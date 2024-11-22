@@ -6,7 +6,10 @@ export function Media() {
   const mpris = Mpris.get_default();
 
   return (
-    <box className="media module">
+    <box
+      className="media module"
+      visible={bind(mpris, "players").as((v) => v.length > 0)}
+    >
       {bind(mpris, "players").as((ps) => {
         const play_icon = bind(ps[0], "playback_status").as((v) => {
           return v == Mpris.PlaybackStatus.PLAYING

@@ -6,7 +6,10 @@ export function SysTray() {
   const tray = Tray.get_default();
 
   return (
-    <box className="tray module">
+    <box
+      className="tray module"
+      visible={bind(tray, "items").as((v) => v.length > 0)}
+    >
       {bind(tray, "items").as((items) =>
         items.map((item) => {
           if (item.iconThemePath) App.add_icons(item.iconThemePath);
