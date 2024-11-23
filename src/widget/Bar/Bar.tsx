@@ -1,14 +1,18 @@
 import { App, Astal, Gtk, Gdk } from "astal/gtk3";
 import Tray from "gi://AstalTray";
+import Mpris from "gi://AstalMpris";
 import { Workspaces } from "./modules/workspace";
 import { SysTray } from "./modules/tray";
 import { Media } from "./modules/media";
 import { Time } from "../time";
 import { Status } from "./modules/status";
-import { Binding, bind } from "astal";
+import { bind } from "astal";
+import icons from "@lib/icons";
+import { SepDot } from "../separator";
 
 export default function Bar(gdkmonitor: Gdk.Monitor) {
   const tray = Tray.get_default();
+  const mpris = Mpris.get_default();
   return (
     <window
       name="bar"
@@ -28,6 +32,13 @@ export default function Bar(gdkmonitor: Gdk.Monitor) {
         </box>
         <box>
           <Media />
+          <SepDot visible={bind(mpris, "players").as((v) => v.length > 0)} />
+          <button
+            onClick={() => App.toggle_window("dashboard")}
+            className={"module"}
+          >
+            <icon icon={icons.ui.dashboard} />
+          </button>
         </box>
         <box hexpand halign={Gtk.Align.END}>
           <SysTray />
@@ -41,12 +52,4 @@ export default function Bar(gdkmonitor: Gdk.Monitor) {
       </centerbox>
     </window>
   );
-}
-
-function SepDot({
-  visible,
-}: {
-  visible?: Binding<boolean | undefined> | boolean;
-}) {
-  return <box className="sep" valign={Gtk.Align.CENTER} visible={visible} />;
 }

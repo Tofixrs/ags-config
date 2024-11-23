@@ -1,9 +1,12 @@
-import { bind } from "astal";
+import { bind, Variable } from "astal";
 import { Gtk } from "astal/gtk3";
 import Mpris from "gi://AstalMpris";
+import GdkPixbuf from "gi://GdkPixbuf?version=2.0";
+import { imageSize, roundImage } from "@lib/utils";
 
 export function Media() {
   const mpris = Mpris.get_default();
+  const cover = Variable<GdkPixbuf.Pixbuf | undefined>(undefined);
 
   return (
     <box
@@ -21,16 +24,30 @@ export function Media() {
             ? "control play playing"
             : " control play paused",
         );
+        if (!cover().get()) {
+          roundImage(ps[0].coverArt).then(async (v) => {
+            const [width, height] = await imageSize(v);
+            cover.set(GdkPixbuf.Pixbuf.new_from_file_at_size(v, width, height));
+          });
+        }
+        bind(ps[0], "coverArt").subscribe((v) => {
+          roundImage(v).then(async (v) => {
+            const [width, height] = await imageSize(v);
+            cover.set(GdkPixbuf.Pixbuf.new_from_file_at_size(v, width, height));
+          });
+        });
         return ps[0] ? (
           <box>
-            <box
-              className={bind(ps[0], "coverArt").as((v) =>
-                "cover" + v != undefined ? "visible" : "",
-              )}
+            <icon
               valign={Gtk.Align.CENTER}
-              css={bind(ps[0], "coverArt").as(
-                (cover) => `background-image: url('${cover}');`,
-              )}
+              className={bind(ps[0], "coverArt").as((v) => {
+                return "cover " + (!v ? "" : "visible");
+              })}
+              setup={(self) => {
+                cover().subscribe((v) => {
+                  if (v) self.pixbuf = v;
+                });
+              }}
             />
             <button
               className="control prev"

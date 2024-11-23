@@ -1,0 +1,117 @@
+@use "theme";
+
+window#dashboard {
+	background: transparent;
+}
+window#dashboard .popupWrap {
+	padding: 50px;
+	padding-bottom: 0;
+}
+.dashboard {
+	min-height: 500px;
+	min-width: 400px;
+	background: theme.$base00;
+	border-radius: 1em;
+	box-shadow: 0px 0px 25px 1px theme.$base01;
+	padding: 1em;
+	.header {
+		padding: 0.5em;
+		border-radius: 1em;
+		.avatar {
+			min-width: 5em;
+			min-height: 5em;
+			border-radius: 1em;
+		}
+		.batteryBar {
+			color: theme.$base00;
+			.bar {
+				block {
+					border-radius: 1em;
+				}
+			}
+		}
+	}
+	.menu {
+		background: theme.$base01;
+		border-radius: 1em;
+		margin-top: 0.5em;
+		padding: 0.5em;
+		.sep {
+			margin: 0.5em 0.5em;
+		}
+		.sep-dot {
+			margin: 0 1em;
+		}
+		scrollable {
+			min-height: 15em;
+			viewport {
+				border: none;
+			}
+		}
+		.menu-list-item {
+			margin: 0.5em 0;
+			.item-header {
+				margin-bottom: 0.5em;
+			}
+			.vol-slider {
+				margin: 0 0.75em;
+				margin-left: 0;
+			}
+		}
+	}
+	.group {
+		background: theme.$base01;
+		border-radius: 1em;
+		margin: 0.25em 0em;
+		padding: 0.5em;
+		& > * {
+			margin: 0.5em 0;
+		}
+	}
+	.brightness {
+		.brightness-slider {
+			margin: 0 1em;
+			border-radius: 1em;
+			trough {
+				border-radius: 1em;
+			}
+			highlight,
+			fill {
+				border-radius: 1em;
+				min-height: 0.75em;
+			}
+		}
+	}
+	.volume {
+		border-radius: 1em;
+		.vol-slider {
+			margin: 0 1em;
+			border-radius: 1em;
+			trough {
+				border-radius: 1em;
+			}
+			highlight,
+			fill {
+				border-radius: 1em;
+				min-height: 0.75em;
+			}
+		}
+	}
+
+	.toggle-button {
+		border-radius: 15px;
+		background-color: theme.$base03;
+	}
+	.toggle-button.active {
+		background-color: theme.$base0E;
+		color: black;
+	}
+
+	.toggle-button.active * {
+		color: black;
+	}
+	.toggle-button button {
+		background-color: transparent;
+		border-radius: 15px;
+	}
+}

@@ -1,10 +1,15 @@
 // https://gitlab.gnome.org/GNOME/gtk/-/blob/gtk-3-24/gtk/theme/Adwaita/_colors-public.scss
 @use "theme";
+@keyframes spin {
+  to {
+    -gtk-icon-transform: rotate(1turn);
+  }
+}
 window.Bar {
-  font-size: 0.8rem;
   background: transparent;
   color: theme.$base05;
   font-weight: bold;
+  font-size: 0.8rem;
 
   > centerbox {
     border-radius: 10px;
@@ -37,13 +42,15 @@ window.Bar {
   }
   .media {
     .cover {
-      border-radius: 50%;
       background-position: center;
       background-size: contain;
+      animation-name: spin;
+      animation-duration: 10s;
+      animation-timing-function: linear;
+      animation-iteration-count: infinite;
+      font-size: 1.5em;
       &.visible {
         margin-right: 0.5em;
-        min-height: 2em;
-        min-width: 2em;
       }
     }
     .control {
@@ -75,12 +82,5 @@ window.Bar {
       padding: 0.5em;
       font-size: 0.8rem;
     }
-  }
-  .sep {
-    border-radius: 50%;
-    min-height: 0.25em;
-    min-width: 0.25em;
-    background: theme.$base04;
-    margin: 0 0.5em;
   }
 }
