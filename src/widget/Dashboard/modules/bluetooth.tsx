@@ -69,10 +69,10 @@ function Deivce(ap: Bluetooth.Device) {
 			className="menu-list-item"
 			onClick={() => {
 				if (ap.connected) {
-					ap.disconnect_device();
+					ap.disconnect_device(null);
 				} else {
 					if (!ap.paired) ap.pair();
-					ap.connect_device();
+					ap.connect_device(null);
 				}
 			}}
 		>
