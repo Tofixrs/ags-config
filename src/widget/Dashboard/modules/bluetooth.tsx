@@ -1,6 +1,6 @@
 import { openMenu } from "../Dashboard";
 import { ArrowToggleButton } from "../SubMenu";
-import { bind, execAsync } from "astal";
+import { bind } from "astal";
 import { Menu } from "src/widget/SubMenu";
 import { Sep, SepDot } from "src/widget/separator";
 import { Gtk } from "astal/gtk3";

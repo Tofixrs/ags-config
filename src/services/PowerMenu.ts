@@ -18,7 +18,7 @@ class PowerMenu extends GObject.Object {
 	private declare currentAction?: PAction;
 	public confirmAction(action: PAction) {
 		this.currentAction = action;
-		App.get_window("powerMenu")?.close();
+		App.get_window("powerMenu")!.visible = false;
 		App.get_window("verification")?.show_all();
 	}
 
