@@ -81,7 +81,7 @@ export function Verification() {
 			visible={false}
 			onKeyPressEvent={(self, e) => {
 				if (e.get_keyval()[1] != Gdk.KEY_Escape) return;
-				self.close();
+				self.visible = false;
 			}}
 		>
 			<box
@@ -96,12 +96,12 @@ export function Verification() {
 					<button
 						className="confirmBtn"
 						onClick={() => {
-							App.get_window("verification")?.close();
+							App.get_window("verification")!.visible = false;
 							PowerMenuService.action();
 						}}
 						onKeyPressEvent={(_, e) => {
 							if (e.get_keycode()[1] != 36) return;
-							App.get_window("verification")?.close();
+							App.get_window("verification")!.visible = false;
 							PowerMenuService.action();
 						}}
 					>
@@ -111,10 +111,10 @@ export function Verification() {
 						className="confirmBtn"
 						onKeyPressEvent={(_, e) => {
 							if (e.get_keycode()[1] != 36) return;
-							App.get_window("verification")?.close();
+							App.get_window("verification")!.visible = false;
 						}}
 						onClick={() => {
-							App.get_window("verification")?.close();
+							App.get_window("verification")!.visible = false;
 						}}
 					>
 						Nah
