@@ -1,7 +1,7 @@
 import { xdgCurrentDesktop } from "./consts";
 import { Gtk } from "astal/gtk3";
 import { getCursorPosOnCurrentMonitor } from "./hyprland";
-import { execAsync } from "../../../../.local/share/ags";
+import { execAsync } from "astal";
 
 export function posAtCursor(window: Gtk.Window) {
 	switch (xdgCurrentDesktop) {

@@ -1,4 +1,4 @@
-import { exec } from "../../../../.local/share/ags";
+import { exec } from "astal";
 import AstalHyprland from "gi://AstalHyprland?version=0.1";
 
 export function getCursorPosOnCurrentMonitor(): { x: number; y: number } {
