@@ -62,4 +62,5 @@ export const xdgConfig = GLib.getenv("XDG_CONFIG_HOME") as string;
 export const xdgCache = GLib.getenv("XDG_CACHE_HOME") as string;
 export const xdgData = GLib.getenv("XDG_DATA_HOME") as string;
 export const xdgHome = GLib.get_home_dir();
+export const xdgCurrentDesktop = GLib.getenv("XDG_CURRENT_DESKTOP") as string;
 export const user = GLib.getenv("USER") as string;

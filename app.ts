@@ -4,6 +4,7 @@ import Bar from "./src/widget/Bar/Bar";
 import { PowerMenu, Verification } from "src/widget/PowerMenu";
 import NotificationPopups from "src/widget/Notifs/Popups";
 import { Dashboard } from "src/widget/Dashboard/Dashboard";
+import { Clipboard } from "src/widget/Clipboard";
 
 App.start({
 	css: style,
@@ -19,6 +20,7 @@ App.start({
 		PowerMenu();
 		Verification();
 		Dashboard();
+		Clipboard();
 
 		App.connect("monitor-added", (_, mon) => {
 			monMap.set(

@@ -1,0 +1,24 @@
+@use "theme";
+
+.clipboard {
+	padding: 1em;
+}
+
+.clipboard .entry > box {
+	margin: 0.25em;
+	padding: 1em;
+	border-radius: 0.5em;
+	background-color: theme.$base01;
+	box-shadow: 0px 0px 5px 0px theme.$base01;
+}
+
+.clipboard .entry:hover > box {
+	background-color: theme.$base02;
+}
+
+.trash_button {
+	border-radius: 50%;
+	background-color: transparent;
+	font-size: 2rem;
+	padding: 0.2em 0.3em;
+}

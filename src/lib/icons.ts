@@ -51,4 +51,5 @@ export default {
 		enabled: "bluetooth-active-symbolic",
 		disabled: "bluetooth-disabled-symbolic",
 	},
+	clipboard: "clipboard-symbolic",
 };
