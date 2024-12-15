@@ -26,6 +26,7 @@ export function Clipboard() {
 			name="clipboard"
 			title="clipboard"
 			resizable={false}
+			visible={false}
 			application={App}
 			setup={(self) => {
 				self.set_default_size(400, 550);
