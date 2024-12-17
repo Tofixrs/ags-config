@@ -13,6 +13,7 @@ export function Media() {
 	return (
 		<box
 			className="media module"
+			visible={redact.get() && mpris.players.length > 0}
 			setup={(self) => {
 				redact.subscribe((v) => {
 					self.visible = !v && mpris.players.length > 0;

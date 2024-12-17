@@ -36,7 +36,7 @@ App.start({
 		});
 	},
 	requestHandler(request, res) {
-		if (request == "toggleredact") {
+		if (request == "toggleRedact") {
 			redact.set(!redact.get());
 			return res("Done");
 		}

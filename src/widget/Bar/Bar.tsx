@@ -34,6 +34,7 @@ export default function Bar(gdkmonitor: Gdk.Monitor) {
 				<box>
 					<Media />
 					<SepDot
+						visible={mpris.players.length > 0 && redact.get()}
 						setup={(self) => {
 							redact.subscribe((v) => {
 								self.visible = !v && mpris.players.length > 0;
