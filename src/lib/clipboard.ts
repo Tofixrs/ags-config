@@ -1,10 +1,9 @@
 import { exec, execAsync } from "astal";
 import { bash } from "./utils";
-import GdkPixbuf from "gi://GdkPixbuf?version=2.0";
 
 export class HistEntry {
 	id: number;
-	text: string;
+	text?: string;
 
 	constructor({ id, text }: { id: number; text: string }) {
 		this.id = id;
@@ -20,11 +19,11 @@ export class HistEntry {
 	}
 	isImage() {
 		return /^\[\[.binary.data.(\S{1,}.){2}(png|jpeg|jpg|gif).(\S{1,}.)\]\]$/.test(
-			this.text,
+			this.text ?? "",
 		);
 	}
 	getImageType() {
-		return this.text.split(" ")[5];
+		return this.text?.split(" ")[5];
 	}
 }
 

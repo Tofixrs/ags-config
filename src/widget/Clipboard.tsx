@@ -79,7 +79,7 @@ function Entry(hist: HistEntry) {
 	const content = {
 		false: () => (
 			<label
-				label={hist.text}
+				label={hist.text ?? ""}
 				wrap
 				max_width_chars={200}
 				hexpand
