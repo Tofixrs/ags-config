@@ -4,6 +4,8 @@ import Mpris from "gi://AstalMpris";
 import GdkPixbuf from "gi://GdkPixbuf?version=2.0";
 import { imageSize, roundImage } from "@lib/utils";
 
+export const redact = Variable(false);
+
 export function Media() {
 	const mpris = Mpris.get_default();
 	const cover = Variable<GdkPixbuf.Pixbuf | undefined>(undefined);
@@ -11,7 +13,14 @@ export function Media() {
 	return (
 		<box
 			className="media module"
-			visible={bind(mpris, "players").as((v) => v.length > 0)}
+			setup={(self) => {
+				redact.subscribe((v) => {
+					self.visible = !v && mpris.players.length > 0;
+				});
+				bind(mpris, "players").subscribe((v) => {
+					self.visible = !redact.get() && v.length > 0;
+				});
+			}}
 		>
 			{bind(mpris, "players").as((ps) => {
 				if (!ps[0]) return "";

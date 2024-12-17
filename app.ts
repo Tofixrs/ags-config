@@ -5,6 +5,7 @@ import { PowerMenu, Verification } from "src/widget/PowerMenu";
 import NotificationPopups from "src/widget/Notifs/Popups";
 import { Dashboard } from "src/widget/Dashboard/Dashboard";
 import { Clipboard } from "src/widget/Clipboard";
+import { redact } from "src/widget/Bar/modules/media";
 
 App.start({
 	css: style,
@@ -33,5 +34,13 @@ App.start({
 			monMap.get(mon)?.forEach((v) => v.destroy());
 			monMap.delete(mon);
 		});
+	},
+	requestHandler(request, res) {
+		if (request == "toggleredact") {
+			redact.set(!redact.get());
+			return res("Done");
+		}
+
+		res("Unkown command");
 	},
 });

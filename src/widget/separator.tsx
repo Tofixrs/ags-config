@@ -1,22 +1,27 @@
 import { Gtk } from "astal/gtk3";
 import { Binding } from "astal";
+import { Box } from "astal/gtk3/widget";
 
 export function SepDot({
-  visible,
+	visible,
+	setup,
 }: {
-  visible?: Binding<boolean | undefined> | boolean;
+	visible?: Binding<boolean | undefined> | boolean;
+	setup?: (self: Box) => void;
 }) {
-  return (
-    <box className="sep-dot" valign={Gtk.Align.CENTER} visible={visible} />
-  );
+	const box = (
+		<box className="sep-dot" valign={Gtk.Align.CENTER} visible={visible} />
+	);
+	if (setup) setup(box as Box);
+	return box;
 }
 
 export function Sep({
-  visible,
+	visible,
 }: {
-  visible?: Binding<boolean | undefined> | boolean;
+	visible?: Binding<boolean | undefined> | boolean;
 }) {
-  return (
-    <box className="sep" hexpand valign={Gtk.Align.CENTER} visible={visible} />
-  );
+	return (
+		<box className="sep" hexpand valign={Gtk.Align.CENTER} visible={visible} />
+	);
 }
