@@ -72,9 +72,15 @@ export function Media() {
 							<icon icon="media-skip-forward-symbolic" />
 						</button>
 						<label
-							label={bind(ps[0], "title").as(
-								() => `${ps[0].title} - ${ps[0].artist}`,
-							)}
+							label={`${ps[0].title} - ${ps[0].artist}`}
+							setup={(self) => {
+								bind(ps[0], "title")
+									.as(() => `${ps[0].title} - ${ps[0].artist}`)
+									.subscribe((v) => (self.label = v));
+								bind(ps[0], "artist")
+									.as(() => `${ps[0].title} - ${ps[0].artist}`)
+									.subscribe((v) => (self.label = v));
+							}}
 						/>
 					</box>
 				);
