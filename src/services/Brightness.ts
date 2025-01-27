@@ -107,6 +107,5 @@ class Device extends GObject.Object {
 			null,
 			null,
 		);
-		this.notify("brightness");
 	}
 }

@@ -1,86 +1,86 @@
 // https://gitlab.gnome.org/GNOME/gtk/-/blob/gtk-3-24/gtk/theme/Adwaita/_colors-public.scss
 @use "theme";
 @keyframes spin {
-  to {
-    -gtk-icon-transform: rotate(1turn);
-  }
+	to {
+		-gtk-icon-transform: rotate(1turn);
+	}
 }
 window.Bar {
-  background: transparent;
-  color: theme.$base05;
-  font-weight: bold;
-  font-size: 0.8rem;
+	background: transparent;
+	color: theme.$base05;
+	font-weight: bold;
+	font-size: 0.8em;
 
-  > centerbox {
-    border-radius: 10px;
-    margin: 0.5em;
-    padding: 0em 1em;
-  }
-  button {
-    all: unset;
-  }
+	> centerbox {
+		border-radius: 10px;
+		margin: 0.5em;
+		padding: 0em 1em;
+	}
+	button {
+		all: unset;
+	}
 
-  .workspace {
-    all: unset;
-    border-radius: 50%;
-    min-height: 0.5em;
-    min-width: 0.5em;
-    margin: 0 0.25em;
-    background: theme.$base04;
+	.workspace {
+		all: unset;
+		border-radius: 50%;
+		min-height: 0.5em;
+		min-width: 0.5em;
+		margin: 0 0.25em;
+		background: theme.$base04;
 
-    &.occupied {
-      background: theme.$base0D;
-    }
-    &.focused {
-      background: theme.$base0E;
-    }
-  }
-  .module {
-    background-color: theme.$base00;
-    border-radius: 1em;
-    padding: 0 1em;
-  }
-  .media {
-    .cover {
-      background-position: center;
-      background-size: contain;
-      animation-name: spin;
-      animation-duration: 10s;
-      animation-timing-function: linear;
-      animation-iteration-count: infinite;
-      font-size: 1.5em;
-      &.visible {
-        margin-right: 0.5em;
-      }
-    }
-    .control {
-      min-height: 1.75em;
-      min-width: 1.75em;
-      border-radius: 50%;
-      margin: 0 0.5em;
-      color: theme.$base00;
-      font-size: 0.75em;
-      &.next,
-      &.prev {
-        background-color: theme.$base0A;
-      }
-      &.play.playing {
-        background-color: theme.$base08;
-      }
-      &.play.paused {
-        background-color: theme.$base0B;
-      }
-    }
-  }
-  .status > * {
-    margin: 0 0.25em;
-    font-size: 0.9rem;
-  }
-  .volume {
-    font-size: 0.25em;
-    .icon {
-      padding: 0.5em;
-      font-size: 0.8rem;
-    }
-  }
+		&.occupied {
+			background: theme.$base0D;
+		}
+		&.focused {
+			background: theme.$base0E;
+		}
+	}
+	.module {
+		background-color: theme.$base00;
+		border-radius: 1em;
+		padding: 0 1em;
+	}
+	.media {
+		.cover {
+			background-position: center;
+			background-size: contain;
+			animation-name: spin;
+			animation-duration: 10s;
+			animation-timing-function: linear;
+			animation-iteration-count: infinite;
+			font-size: 1.5em;
+			&.visible {
+				margin-right: 0.5em;
+			}
+		}
+		.control {
+			min-height: 1.75em;
+			min-width: 1.75em;
+			border-radius: 50%;
+			margin: 0 0.5em;
+			color: theme.$base00;
+			font-size: 0.75em;
+			&.next,
+			&.prev {
+				background-color: theme.$base0A;
+			}
+			&.play.playing {
+				background-color: theme.$base08;
+			}
+			&.play.paused {
+				background-color: theme.$base0B;
+			}
+		}
+	}
+	.status > * {
+		margin: 0 0.25em;
+		font-size: 0.9rem;
+	}
+	.volume {
+		font-size: 0.25em;
+		.icon {
+			padding: 0.5em;
+			font-size: 0.8rem;
+		}
+	}
 }

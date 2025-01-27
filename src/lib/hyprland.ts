@@ -1,4 +1,5 @@
 import { exec } from "astal";
+import { Gdk } from "astal/gtk3";
 import AstalHyprland from "gi://AstalHyprland?version=0.1";
 
 export function getCursorPosOnCurrentMonitor(): { x: number; y: number } {
@@ -20,4 +21,14 @@ export function getCursorPosOnCurrentMonitor(): { x: number; y: number } {
 	});
 
 	return { x: realX - monitor!.x, y: realY - monitor!.y };
+}
+
+export function getHyprMonitor(monitor: Gdk.Monitor) {
+	const display = Gdk.Display.get_default()!;
+	const hypr = AstalHyprland.get_default();
+	for (let i = 0; i < display.get_n_monitors(); i++) {
+		if (monitor != display.get_monitor(i)) continue;
+
+		return hypr.get_monitor(i);
+	}
 }

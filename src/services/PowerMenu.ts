@@ -1,7 +1,6 @@
 import GObject, { register, property } from "astal/gobject";
 import { App } from "astal/gtk3";
-import { execAsync, exec } from "astal";
-import { user } from "@lib/consts";
+import { execAsync } from "astal";
 
 export const PowerAction = {
 	Shutdown: 0,
@@ -33,12 +32,7 @@ class PowerMenu extends GObject.Object {
 				break;
 			}
 			case PowerAction.Logout: {
-				const regex = new RegExp(`${user}.*user`);
-				const session = exec("loginctl")
-					.split("\n")
-					.find((v) => regex.test(v))
-					?.split(/\s+/)[1];
-				execAsync(`loginctl kill-session ${session}`);
+				execAsync(`uwsm stop`);
 				break;
 			}
 			case PowerAction.Reboot: {

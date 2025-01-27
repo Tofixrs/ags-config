@@ -1,17 +1,17 @@
 import { getHistory, HistEntry } from "@lib/clipboard";
 import { Image, RegularWindow } from "@lib/widget";
 import { posAtCursor } from "@lib/window";
-import { bind, exec, GLib, Variable } from "astal";
+import { bind, Variable } from "astal";
 import { App } from "astal/gtk3";
 import { Sep, SepDot } from "./separator";
 import icons from "@lib/icons";
 import { bash } from "@lib/utils";
 import Gtk from "gi://Gtk?version=3.0";
 import GdkPixbuf from "gi://GdkPixbuf?version=2.0";
+import Gio from "gi://Gio?version=2.0";
+import { clamp } from "@lib/math";
 
-const history = Variable<HistEntry[]>([]).poll(1000000, "echo", () =>
-	getHistory(),
-);
+const history = Variable<HistEntry[]>([]);
 
 App.connect("window-toggled", (_, window) => {
 	if (window.name != "clipboard" || !window.visible) return;
@@ -21,6 +21,19 @@ App.connect("window-toggled", (_, window) => {
 });
 
 export function Clipboard() {
+	const children = Variable<Gtk.Widget[]>([]);
+
+	bind(history).subscribe((v) => {
+		const entries = [];
+		const l = clamp(v.length, 0, 25);
+		for (let i = 0; i < l; i++) {
+			entries.push(Entry(v[i]));
+		}
+		Promise.all(entries).then((v) => {
+			children.set(v);
+		});
+	});
+
 	return (
 		<RegularWindow
 			name="clipboard"
@@ -50,28 +63,35 @@ export function Clipboard() {
 					vexpand
 					maxContentWidth={500}
 				>
-					<box
-						className="entries"
-						vertical
-						children={bind(history).as((v) => v.map(Entry))}
-					/>
+					<box className="entries" vertical children={bind(children)} />
 				</scrollable>
 			</box>
 		</RegularWindow>
 	);
 }
 
-function Entry(hist: HistEntry) {
+async function Entry(hist: HistEntry) {
 	if (hist.isImage()) {
-		bash(`mkdir -p /tmp/ags/hist`);
-		if (
-			!GLib.file_test(
-				`/tmp/ags/hist/${hist.id}.${hist.getImageType()}`,
-				GLib.FileTest.EXISTS,
-			)
-		) {
-			exec(
-				`bash -c "cliphist decode ${hist.id} >> /tmp/ags/hist/${hist.id}.${hist.getImageType()}"`,
+		const file = Gio.File.new_for_path(
+			`/tmp/ags/hist/${hist.id}.${hist.getImageType()}`,
+		);
+		const infoPromise = new Promise<Gio.FileInfo>((res) => {
+			file.query_info_async(
+				Gio.FILE_ATTRIBUTE_STANDARD_TYPE,
+				Gio.FileQueryInfoFlags.NONE,
+				0,
+				null,
+				(vm, aRes) => {
+					const info = vm?.query_info_finish(aRes);
+					return res(info as Gio.FileInfo);
+				},
+			);
+		});
+		const info = await infoPromise;
+		const fileType = info.get_file_type();
+		if (fileType == Gio.FileType.UNKNOWN) {
+			await bash(
+				`mkdir -p /tmp/ags/hist/ && cliphist decode ${hist.id} >> /tmp/ags/hist/${hist.id}.${hist.getImageType()}`,
 			);
 		}
 	}

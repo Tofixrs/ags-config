@@ -8,7 +8,7 @@
       name = "dev";
       buildInputs = [
         (inputs'.ags.packages.default.override {
-          extraPackages = self.lib.modules {inherit inputs';};
+          extraPackages = self.lib.modules {inherit inputs' pkgs;};
         })
       ];
     };

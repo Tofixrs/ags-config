@@ -1,38 +1,54 @@
-import { bind } from "astal";
+import { bind, Binding, Variable } from "astal";
 import { Gtk } from "astal/gtk3";
 import { range } from "@lib/utils";
 import Hyprland from "gi://AstalHyprland";
 const minWorkspaces = 5;
 
 export function Workspaces() {
-  const hypr = Hyprland.get_default();
-  return (
-    <box className="workspaces module">
-      {range(10, 1).map((i) => {
-        const workspace = bind(hypr, "focusedWorkspace").as(() =>
-          hypr.get_workspace(i),
-        );
-        const visible = workspace.as(
-          (v) => v != undefined || i <= minWorkspaces,
-        );
-        const classes = workspace
-          .as((v) => {
-            const res: string[] = ["workspace"];
-            if (!v) return res;
-            if (v.clients.length > 0) res.push("occupied");
-            if (hypr.focusedWorkspace == v) res.push("focused");
-            return res;
-          })
-          .as((v) => v.join(" "));
-        return (
-          <button
-            visible={visible}
-            className={classes}
-            onClick={() => hypr.workspaces[i].focus()}
-            valign={Gtk.Align.CENTER}
-          ></button>
-        );
-      })}
-    </box>
-  );
+	const hypr = Hyprland.get_default();
+
+	function checkClasses(
+		occupied: Binding<boolean>,
+		focused: Binding<boolean>,
+		classes: Variable<string[]>,
+	) {
+		const o = occupied.get();
+		const f = focused.get();
+
+		if (o && f) classes.set(["workspace", "focused", "occupied"]);
+		if (f && !o) classes.set(["workspace", "focused"]);
+		if (!f && o) classes.set(["workspace", "occupied"]);
+		if (!f && !o) classes.set(["workspace"]);
+	}
+	return (
+		<box className="workspaces module">
+			{bind(hypr, "workspaces").as((wss) => {
+				return wss
+					.filter((ws) => !(ws.id >= -99 && ws.id <= -2))
+					.sort((a, b) => a.id - b.id)
+					.map((ws) => {
+						const occupied = bind(ws, "clients").as((v) => v.length > 0);
+						const focused = bind(hypr, "focusedWorkspace").as((v) => v == ws);
+
+						const classes = Variable(["workspace"]);
+						checkClasses(occupied, focused, classes);
+
+						focused.subscribe(() => {
+							checkClasses(occupied, focused, classes);
+						});
+						occupied.subscribe(() => {
+							checkClasses(occupied, focused, classes);
+						});
+
+						return (
+							<button
+								className={bind(classes).as((v) => v.join(" "))}
+								valign={Gtk.Align.CENTER}
+								onClick={() => ws.focus()}
+							></button>
+						);
+					});
+			})}
+		</box>
+	);
 }

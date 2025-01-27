@@ -3,24 +3,24 @@
 @use "theme";
 
 .arrow .icon {
-  transition: 200ms;
-  transition-property: -gtk-icon-transform;
-  transition-timing-function: ease-in;
+	transition: 200ms;
+	transition-property: -gtk-icon-transform;
+	transition-timing-function: ease-in;
 }
 .arrow.opened .icon {
-  -gtk-icon-transform: rotate(90deg);
+	-gtk-icon-transform: rotate(90deg);
 }
 .sep-dot {
-  border-radius: 50%;
-  min-height: 0.25em;
-  min-width: 0.25em;
-  background: theme.$base04;
-  margin: 0 0.5em;
+	border-radius: 50%;
+	min-height: 0.25em;
+	min-width: 0.25em;
+	background: theme.$base04;
+	margin: 0 0.5em;
 }
 
 .sep {
-  border-radius: 1em;
-  margin: 0 0.5em;
-  min-height: 0.25em;
-  background: theme.$base04;
+	border-radius: 1em;
+	margin: 0 0.5em;
+	min-height: 0.25em;
+	background: theme.$base04;
 }

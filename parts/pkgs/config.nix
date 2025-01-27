@@ -8,5 +8,5 @@ inputs.ags.lib.bundle {
   src = ../../.;
   name = "ags-config";
   entry = "app.ts";
-  extraPackages = self.lib.modules {inherit inputs';};
+  extraPackages = self.lib.modules {inherit inputs' pkgs;};
 }

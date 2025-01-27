@@ -1,0 +1,16 @@
+@use "theme";
+.stat-wrapper {
+	.stat {
+		min-height: 10em;
+		min-width: 10em;
+		.icon {
+			font-size: 5em;
+		}
+	}
+	.cpu {
+		color: theme.$base08;
+	}
+	.ram {
+		color: theme.$base0D;
+	}
+}
