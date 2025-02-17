@@ -75,21 +75,20 @@ async function Entry(hist: HistEntry) {
 		const file = Gio.File.new_for_path(
 			`/tmp/ags/hist/${hist.id}.${hist.getImageType()}`,
 		);
-		const infoPromise = new Promise<Gio.FileInfo>((res) => {
-			file.query_info_async(
-				Gio.FILE_ATTRIBUTE_STANDARD_TYPE,
-				Gio.FileQueryInfoFlags.NONE,
-				0,
-				null,
-				(vm, aRes) => {
-					const info = vm?.query_info_finish(aRes);
-					return res(info as Gio.FileInfo);
-				},
-			);
+		const infoPromise = new Promise<Gio.FileInfo>((res, rej) => {
+			try {
+				const fileInfo = file.query_info(
+					Gio.FILE_ATTRIBUTE_STANDARD_TYPE,
+					Gio.FileQueryInfoFlags.NONE,
+					null,
+				);
+				return res(fileInfo);
+			} catch (e) {
+				return rej(e);
+			}
 		});
-		const info = await infoPromise;
-		const fileType = info.get_file_type();
-		if (fileType == Gio.FileType.UNKNOWN) {
+		const info = await infoPromise.catch(() => {});
+		if (!info) {
 			await bash(
 				`mkdir -p /tmp/ags/hist/ && cliphist decode ${hist.id} >> /tmp/ags/hist/${hist.id}.${hist.getImageType()}`,
 			);
