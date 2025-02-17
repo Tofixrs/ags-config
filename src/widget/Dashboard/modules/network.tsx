@@ -9,6 +9,9 @@ import icons from "@lib/icons";
 
 export function NetworkToggle() {
 	const network = Network.get_default();
+	const name = bind(network.wifi, "enabled").as((v) =>
+		v ? network.wifi.ssid : "Disconnected",
+	);
 	return (
 		<ArrowToggleButton
 			opened={openMenu}
@@ -25,7 +28,7 @@ export function NetworkToggle() {
 			condition={bind(network.wifi, "enabled")}
 		>
 			<icon icon={bind(network.wifi, "iconName")} />
-			<label label={bind(network.wifi, "ssid")} truncate maxWidthChars={10} />
+			<label label={name} truncate maxWidthChars={10} />
 		</ArrowToggleButton>
 	);
 }
@@ -50,8 +53,8 @@ export function WifiSelection() {
 					{bind(network.wifi, "access_points").as((v) =>
 						v
 							.sort((a, b) => {
-								if (network.wifi.activeAccessPoint.bssid == a.bssid) return -1;
-								if (network.wifi.activeAccessPoint.bssid == b.bssid) return 1;
+								if (network.wifi.activeAccessPoint?.bssid == a.bssid) return -1;
+								if (network.wifi.activeAccessPoint?.bssid == b.bssid) return 1;
 								return b.strength - a.strength;
 							})
 							.map(Wifi),
@@ -77,6 +80,7 @@ function Wifi(ap: Network.AccessPoint) {
 				<icon
 					icon={icons.ui.tick}
 					visible={bind(network.wifi, "activeAccessPoint").as((v) => {
+						if (v == null) return false;
 						return v.bssid == ap.bssid;
 					})}
 				/>
