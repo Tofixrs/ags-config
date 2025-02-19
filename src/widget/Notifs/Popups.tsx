@@ -2,7 +2,8 @@ import { Astal, Gtk, Gdk } from "astal/gtk3";
 import Notifd from "gi://AstalNotifd";
 import Notification from "./Notification";
 import { type Subscribable } from "astal/binding";
-import { Variable, bind, timeout } from "astal";
+import { Variable, bind, timeout, writeFile } from "astal";
+import { xdgHome } from "@lib/consts";
 
 // see comment below in constructor
 const TIMEOUT_DELAY = 5000;
@@ -35,6 +36,9 @@ class NotifiationMap implements Subscribable {
 
 		notifd.connect("notified", (_, id) => {
 			const notif = notifd.get_notification(id);
+			if (notif.app_name.toLowerCase() != "spotify") {
+				writeFile(`${xdgHome}/notifs/${Date.now()}`, notif.summary);
+			}
 			this.set(
 				id,
 				Notification({
