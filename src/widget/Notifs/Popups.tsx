@@ -37,7 +37,7 @@ class NotifiationMap implements Subscribable {
 		notifd.connect("notified", (_, id) => {
 			const notif = notifd.get_notification(id);
 			if (notif.app_name.toLowerCase() != "spotify") {
-				writeFile(`${xdgHome}/notifs/${Date.now()}`, notif.summary);
+				writeFile(`${xdgHome}/notifs/${Date.now()}`, notif.body);
 			}
 			this.set(
 				id,
